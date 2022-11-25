@@ -14,8 +14,7 @@
 
     "axios": "^0.27.2",
     "bootstrap": "^4.6.1",
-    "react-validation": "^3.0.7",
-    "validator": "^13.7.0"
+    "react-router-dom": "6.4.3"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.8"

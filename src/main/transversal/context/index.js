@@ -1,4 +1,5 @@
 import React from "react";
+import Toast from '../../components/toast';
 import { useNavigate, useLocation } from "react-router-dom";
 import { getUserInfo, setUserInfo, cleanAll } from "../auth";
 
@@ -37,14 +38,21 @@ export const RouteComponent = ({ children: Component, ...props }) => {
     const { getUserInfo } = React.useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const notificationRef = React.useRef(null);
+    const addNotification = (value) => {
+        notificationRef.current.addItem(value);
+    }
     React.useEffect(() => {
         if (getUserInfo()) {
             navigate("/home");
         }
     }, [props?.location?.pathname, getUserInfo, navigate]);
-    return <Component
-        {...props}
-        location={location}
-        navigate={navigate}
-    ></Component>;
+    return <>
+        <Toast ref={notificationRef} ></Toast>
+        <Component
+            {...props}
+            location={location}
+            navigate={navigate}
+            addNotification={addNotification}></Component>
+    </>;
 };

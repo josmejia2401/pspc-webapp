@@ -1,11 +1,12 @@
 import { buildHeaders, setAccessToken } from '../transversal/auth';
 import { CustomError } from '../transversal/error';
+import Constants from "../transversal/constants";
 const axios = require('axios');
 
 export const signIn = async (payload) => {
     try {
         const authHeaders = buildHeaders();
-        const res = await axios.post('http://httpbin.org/post', payload, {
+        const res = await axios.post(`${Constants.API.auth.signIn}`, payload, {
             headers: {
                 ...authHeaders
             },

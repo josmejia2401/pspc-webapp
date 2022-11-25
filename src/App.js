@@ -13,7 +13,7 @@ function App() {
         <React.Suspense fallback={<AuthLoading></AuthLoading>}>
           <Routes>
             <Route exact path="/sign-in" element={<RouteComponent children={AuthSignIn}></RouteComponent>} />
-            <Route exact path="/home" element={<AuthRouteComponent children={AuthLoading1} ></AuthRouteComponent>} />
+            <Route exact path="/home" element={<AuthRouteComponent children={AuthLoading1}></AuthRouteComponent>} />
             <Route path="*" element={<Navigate to={"/sign-in"} replace></Navigate>} />
           </Routes>
         </React.Suspense>
