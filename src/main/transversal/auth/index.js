@@ -1,5 +1,5 @@
 import Storage from "../storage";
-
+import TokenUtils from "../auth/token";
 export const getUserInfo = () => {
     const userInfo = Storage.get("USER_INFO");
     if (userInfo) {
@@ -22,6 +22,14 @@ export const getAccessToken = () => {
 
 export const setAccessToken = (accessToken) => {
     return Storage.set("ACCESS_TOKEN", JSON.stringify(accessToken));
+}
+
+export const getTokenInfo = () => {
+    const userInfo = Storage.get("ACCESS_TOKEN");
+    if (userInfo) {
+        return TokenUtils.getInfoToken(userInfo);
+    }
+    return null;
 }
 
 export const cleanAll = () => {

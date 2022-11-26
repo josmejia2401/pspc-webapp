@@ -1,7 +1,7 @@
+import axios from 'axios';
 import { buildHeaders, setAccessToken } from '../transversal/auth';
 import { CustomError } from '../transversal/error';
 import Constants from "../transversal/constants";
-const axios = require('axios');
 
 export const signIn = async (payload) => {
     try {
@@ -12,9 +12,7 @@ export const signIn = async (payload) => {
             },
         });
         const data = res.data;
-        console.log(data);
-        //Se guarda en cache
-        setAccessToken(data["accessToken"]);
+        setAccessToken(data["token"]);
         return data;
     } catch (error) {
         console.error(error);
