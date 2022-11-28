@@ -1,3 +1,6 @@
+import { Buffer } from "buffer";
+//window.Buffer = buffer.Buffer;
+
 export class Utils {
     static isEmpty(value) {
         if (value === undefined || value === null || value === "") {
