@@ -1,7 +1,7 @@
 import * as React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthRouteComponent, AuthProvider, RouteComponent } from "./main/transversal/context";
-import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import AuthLoading from './main/views/auth-loading';
 const AuthSignIn = React.lazy(() => import("./main/views/auth-sing-in"));

@@ -1,7 +1,7 @@
 import React from "react";
 import Toast from '../../components/toast';
 import { useNavigate, useLocation } from "react-router-dom";
-import { getUserInfo, setUserInfo, getTokenInfo, cleanAll } from "../auth";
+import { getUserInfo, setUserInfo, getTokenInfo } from "../auth";
 
 export const AuthContext = React.createContext({
     getUserInfo: getUserInfo,
@@ -24,7 +24,6 @@ export const AuthRouteComponent = ({ children: Component, ...props }) => {
     const location = useLocation();
     React.useEffect(() => {
         if (!getTokenInfo()) {
-            cleanAll();
             navigate("/sign-in");
         }
     }, [props?.location?.pathname, getTokenInfo, navigate]);

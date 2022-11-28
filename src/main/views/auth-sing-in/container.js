@@ -5,6 +5,7 @@ import { signIn } from "../../services/auth";
 import { getJsonOfForm } from "../../transversal/utils/form";
 
 class Container extends React.Component {
+
     static contextType = AuthContext;
 
     constructor(props) {
@@ -24,15 +25,16 @@ class Container extends React.Component {
         if (isValid === true) {
             this.setState({ isLoadingMain: true });
             const data = getJsonOfForm(form, { username: "", password: "" });
-            signIn(data).then(result => {
+            signIn(data).then(_result => {
+                form.reset();
                 this.props.navigate("/home");
             }).catch(error => {
-                this.setState({ isLoadingMain: false });
                 this.props.addNotification({ typeToast: 'error', text: error.message });
-            });
+            }).finally(() => this.setState({ isLoadingMain: false }));
         }
         form.classList.add('was-validated');
     }
+
     render() {
         return <Presenter
             state={this.state}
