@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate } from 'react-router-dom';
 import Button from "../../components/button/index";
 import "./style.css";
 const Presenter = props => (
@@ -27,7 +28,8 @@ const Presenter = props => (
                 </label>
             </div>
             <Button title="Sign-in" type="submit" isLoadingMain={props.state.isLoadingMain}></Button>
-            <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+            <button type="button" className="btn btn-link" style={{ "textAlign": "left", "padding": 0 }} onClick={(e) => props.navigate("/sign-up")}>You have an account?</button>
+            <p className="mt-5 mb-3 text-muted text-center">&copy; 2017–2022</p>
         </form>
     </main>
 );

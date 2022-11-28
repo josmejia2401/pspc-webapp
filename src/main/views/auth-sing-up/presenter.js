@@ -2,10 +2,10 @@ import React from "react";
 import Button from "../../components/button/index";
 import "./style.css";
 const Presenter = props => (
-    <main className="form-signin w-100 m-auto">
+    <main className="form-signup w-100 m-auto">
         <form className="row g-3 needs-validation" onSubmit={props.handleSignIn} noValidate>
             <img className="mb-4" src="https://icons.getbootstrap.com/assets/img/icons-hero.png" alt="" width="72" height="72" />
-            <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
             <div className="col-12">
                 <label htmlFor="floatingUsername" className="form-label">Username</label>
                 <input type="text" className="form-control" id="floatingUsername" name="username" placeholder="username" required />

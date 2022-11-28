@@ -39,6 +39,7 @@ class Container extends React.Component {
         return <Presenter
             state={this.state}
             handleSignIn={this.handleSignIn}
+            {...this.props}
         />;
     }
 }
