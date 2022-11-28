@@ -5,7 +5,8 @@ import { AuthRouteComponent, AuthProvider, RouteComponent } from "./main/transve
 import './App.css';
 import AuthLoading from './main/views/auth-loading';
 const AuthSignIn = React.lazy(() => import("./main/views/auth-sing-in"));
-const AuthLoading1 = React.lazy(() => import("./main/views/auth-loading"));
+const AuthSignUp = React.lazy(() => import("./main/views/auth-sing-up"));
+const Home = React.lazy(() => import("./main/views/home"));
 function App() {
   return (
     <AuthProvider>
@@ -13,7 +14,8 @@ function App() {
         <React.Suspense fallback={<AuthLoading></AuthLoading>}>
           <Routes>
             <Route exact path="/sign-in" element={<RouteComponent children={AuthSignIn}></RouteComponent>} />
-            <Route exact path="/home" element={<AuthRouteComponent children={AuthLoading1}></AuthRouteComponent>} />
+            <Route exact path="/sign-up" element={<RouteComponent children={AuthSignUp}></RouteComponent>} />
+            <Route exact path="/home" element={<AuthRouteComponent children={Home}></AuthRouteComponent>} />
             <Route path="*" element={<Navigate to={"/sign-in"} replace></Navigate>} />
           </Routes>
         </React.Suspense>
