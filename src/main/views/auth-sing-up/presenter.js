@@ -2,53 +2,78 @@ import React from "react";
 import Button from "../../components/button/index";
 import "./style.css";
 const Presenter = props => (
-    <main className="form-signup w-100 m-auto">
-        <form className="row g-3 needs-validation" onSubmit={props.handleSignIn} noValidate>
-            <img className="mb-4" src="https://icons.getbootstrap.com/assets/img/icons-hero.png" alt="" width="72" height="72" />
-            <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
-            <div className="col-12">
-                <label htmlFor="floatingName" className="form-label">Fullname</label>
-                <input type="text" className="form-control" id="floatingName" name="fullName" placeholder="fullname" required />
-                <div className="invalid-feedback">
-                    Fullname is required
-                </div>
+    <div className=" d-flex flex-column h-100 w-100">
+        <main className="flex-shrink-0 form-signup m-auto w-100">
+            <div className="container">
+                <form className="g-3 needs-validation" onSubmit={props.handleSignIn} noValidate>
+                    <img className="img-fluid rounded mx-auto d-block" src="/assets/image/ax9.png" alt="" width="150" height="150" />
+                    <h1 className="h3 mb-3 fw-normal text-center">Sign Up</h1>
+                    <div className="row mb-3">
+                        <div className="col-12">
+                            <label htmlFor="floatingFullname" className="form-label">Fullname</label>
+                            <input type="text" className="form-control" id="floatingFullname" name="fullName" placeholder="Fullname" required />
+                            <div className="invalid-feedback">
+                                Fullname is required
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <div className="col-12">
+                            <label htmlFor="floatingEmail" className="form-label">Email</label>
+                            <input type="email" className="form-control" id="floatingEmail" name="email" placeholder="email" required />
+                            <div className="invalid-feedback">
+                                Email is required
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <div className="col-12">
+                            <label htmlFor="floatingPhonenumber" className="form-label">Phone number</label>
+                            <input type="text" className="form-control" id="floatingPhonenumber" name="phoneNumber" placeholder="phone" required />
+                            <div className="invalid-feedback">
+                                Phone is required
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <div className="col-12">
+                            <label htmlFor="floatingUsername" className="form-label">Username</label>
+                            <input type="text" className="form-control" id="floatingUsername" name="username" placeholder="username" required />
+                            <div className="invalid-feedback">
+                                Username is required
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <div className="col-12">
+                            <label htmlFor="floatingPassword" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="floatingPassword" name="password" placeholder="Password" required />
+                            <div className="invalid-feedback">
+                                Password is required
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <div className="checkbox">
+                            <label>
+                                <input type="checkbox" value="remember-me" /> Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <Button title="Register now" type="submit" className="w-100" isLoadingMain={props.state.isLoadingMain}></Button>
+                    <button type="button" className="btn btn-link w-100 float-right" style={{ "padding": 0, "marginTop": 10 }} onClick={(e) => props.navigate("/sign-up")}>You have not an account?</button>
+                </form>
             </div>
+        </main>
+        <footer className="footer my-4">
+            {/*<ul className="nav justify-content-center border-bottom pb-3 mb-3">
+                <li className="nav-item"><a href="#" className="nav-link px-2 text-muted">Home</a></li>
+                <li className="nav-item"><a href="#" className="nav-link px-2 text-muted">Features</a></li>
+            </ul> */}
+            <p className="text-center text-muted">&copy; 2022 PSPC</p>
+        </footer>
 
-            <div className="col-12">
-                <label htmlFor="floatingEmaul" className="form-label">Email</label>
-                <input type="email" className="form-control" id="floatingEmail" name="email" placeholder="email@email.com" required />
-                <div className="invalid-feedback">
-                    Email is required
-                </div>
-            </div>
-
-            <div className="col-12">
-                <label htmlFor="floatingUsername" className="form-label">Username</label>
-                <input type="text" className="form-control" id="floatingUsername" name="username" placeholder="username" required />
-                <div className="invalid-feedback">
-                    Username is required
-                </div>
-            </div>
-            <div className="col-12">
-                <label htmlFor="floatingPassword" className="form-label">Password</label>
-                <input type="password" className="form-control" id="floatingPassword" name="password" placeholder="Password" required />
-                <div className="invalid-feedback">
-                    Password is required
-                </div>
-            </div>
-
-            <div className="col-12">
-                <label htmlFor="floatingPhonenumber" className="form-label">Phone</label>
-                <input type="text" className="form-control" id="floatingPhonenumber" name="phoneNumber" placeholder="3105555555" required />
-                <div className="invalid-feedback">
-                    Phone number is required
-                </div>
-            </div>
-            <Button title="Register now" type="submit" isLoadingMain={props.state.isLoadingMain}></Button>
-            <button type="button" className="btn btn-link" style={{ "textAlign": "left", "padding": 0 }} onClick={(e) => props.navigate("/sign-in")}>Sign in now</button>
-            <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
-        </form>
-    </main>
+    </div>
 );
 
 export default Presenter;

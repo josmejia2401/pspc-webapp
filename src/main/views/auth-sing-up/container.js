@@ -1,7 +1,7 @@
 import React from 'react';
 import Presenter from './presenter';
 import { AuthContext } from "../../transversal/context";
-import { signIn } from "../../services/auth";
+import { signUp } from "../../services/auth";
 import { getJsonOfForm } from "../../transversal/utils/form";
 
 class Container extends React.Component {
@@ -25,7 +25,7 @@ class Container extends React.Component {
         if (isValid === true) {
             this.setState({ isLoadingMain: true });
             const data = getJsonOfForm(form, { username: "", password: "" });
-            signIn(data).then(_result => {
+            signUp(data).then(_result => {
                 form.reset();
                 this.props.navigate("/home");
             }).catch(error => {

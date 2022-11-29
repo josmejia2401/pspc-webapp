@@ -6,8 +6,8 @@ const Presenter = props => (
         <main className="flex-shrink-0 form-signin m-auto">
             <div className="container">
                 <form className="g-3 needs-validation" onSubmit={props.handleSignIn} noValidate>
-                    <img className="img-fluid rounded mx-auto d-block" src="/assets/image/ax9.png" alt="" />
-                    <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                    <img className="img-fluid rounded mx-auto d-block" src="/assets/image/ax9.png" alt="" width="150" height="150" />
+                    <h1 className="h3 mb-3 fw-normal text-center">Sign in</h1>
                     <div className="row mb-3">
                         <div className="col-12">
                             <label htmlFor="floatingUsername" className="form-label">Username</label>
@@ -33,16 +33,16 @@ const Presenter = props => (
                             </label>
                         </div>
                     </div>
-                    <Button title="Sign-in" type="submit" className="w-100" isLoadingMain={props.state.isLoadingMain}></Button>
+                    <Button title="Login" type="submit" className="w-100" isLoadingMain={props.state.isLoadingMain}></Button>
                     <button type="button" className="btn btn-link w-100 float-right" style={{ "padding": 0, "marginTop": 10 }} onClick={(e) => props.navigate("/sign-up")}>You have not an account?</button>
                 </form>
             </div>
         </main>
         <footer className="footer my-4">
-            <ul className="nav justify-content-center border-bottom pb-3 mb-3">
+            {/*<ul className="nav justify-content-center border-bottom pb-3 mb-3">
                 <li className="nav-item"><a href="#" className="nav-link px-2 text-muted">Home</a></li>
                 <li className="nav-item"><a href="#" className="nav-link px-2 text-muted">Features</a></li>
-            </ul>
+            </ul> */}
             <p className="text-center text-muted">&copy; 2022 PSPC</p>
         </footer>
 
