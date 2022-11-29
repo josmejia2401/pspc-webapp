@@ -24,14 +24,14 @@ class Container extends React.Component {
     }
 
     render() {
-        const { isLoadingMain, type, title} = this.props;
+        const { isLoadingMain, type, title, className} = this.props;
         if (this.state.isLoading || isLoadingMain) {
-            return (<button className="btn btn-primary" type="button" disabled={true}>
+            return (<button className={`btn btn-primary ${className}`} type="button" disabled={true}>
                 <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 <span className="visually-hidden">Loading...</span>
             </button>);
         }
-        return (<button className="btn btn-primary" type={type ? type : "button"} onClick={this.handleOnPress} disabled={false}>
+        return (<button className={`btn btn-primary ${className}`} type={type ? type : "button"} onClick={this.handleOnPress} disabled={false}>
             {title}
         </button>);
     }
