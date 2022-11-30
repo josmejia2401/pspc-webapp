@@ -61,11 +61,11 @@ const Presenter = props => (
                         </div>
                     </div>
                     <Button title="Register now" type="submit" className="w-100" isLoadingMain={props.state.isLoadingMain}></Button>
-                    <button type="button" className="btn btn-link w-100 float-right" style={{ "padding": 0, "marginTop": 10 }} onClick={(e) => props.navigate("/sign-up")}>You have not an account?</button>
+                    <button type="button" className="btn btn-link w-100 float-right" style={{ "padding": 0, "marginTop": 10 }} onClick={(e) => props.navigate("/sign-in")}>Go to Login</button>
                 </form>
             </div>
         </main>
-        <footer className="footer my-4">
+        <footer className="footer">
             {/*<ul className="nav justify-content-center border-bottom pb-3 mb-3">
                 <li className="nav-item"><a href="#" className="nav-link px-2 text-muted">Home</a></li>
                 <li className="nav-item"><a href="#" className="nav-link px-2 text-muted">Features</a></li>

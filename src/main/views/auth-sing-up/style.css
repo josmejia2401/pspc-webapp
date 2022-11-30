@@ -1,6 +1,6 @@
 .form-signup {
     max-width: 430px;
-    padding: 15px;
+    padding: unset;
 }
 
 .form-signup .form-floating:focus-within {
