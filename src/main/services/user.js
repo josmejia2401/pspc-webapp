@@ -1,19 +1,18 @@
-import { buildHeaders, setUserInfo } from '../transversal/auth';
+import axios from 'axios';
+import { buildHeaders, setAccessToken } from '../transversal/auth';
 import { CustomError } from '../transversal/error';
-const axios = require('axios');
+import Constants from "../transversal/constants";
 
-export const getUserInfo = async () => {
+export const create = async (payload) => {
     try {
         const authHeaders = buildHeaders();
-        const res = await axios.get('http://httpbin.org/post/iddddddddddddddddddddddd', {
+        const res = await axios.post(`${Constants.API.user.create}`, payload, {
             headers: {
                 ...authHeaders
             },
         });
         const data = res.data;
-        console.log(data);
-        //Se guarda en cache
-        setUserInfo(data);
+        setAccessToken(data["token"]);
         return data;
     } catch (error) {
         console.error(error);

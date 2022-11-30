@@ -3,7 +3,7 @@ import Button from "../../components/button/index";
 import "./style.css";
 const Presenter = props => (
     <div className=" d-flex flex-column h-100 w-100">
-        <main className="flex-shrink-0 form-signup m-auto w-100">
+        <main className="flex-shrink-0 form-signup m-auto">
             <div className="container">
                 <form className="g-3 needs-validation" onSubmit={props.handleSignIn} noValidate>
                     <img className="img-fluid rounded mx-auto d-block" src="/assets/image/ax9.png" alt="" width="150" height="150" />
@@ -29,7 +29,7 @@ const Presenter = props => (
                     <div className="row mb-3">
                         <div className="col-12">
                             <label htmlFor="floatingPhonenumber" className="form-label">Phone number</label>
-                            <input type="text" className="form-control" id="floatingPhonenumber" name="phoneNumber" placeholder="phone" required />
+                            <input type="text" className="form-control" id="floatingPhonenumber" name="telephone" placeholder="phone" required />
                             <div className="invalid-feedback">
                                 Phone is required
                             </div>
@@ -61,7 +61,7 @@ const Presenter = props => (
                         </div>
                     </div>
                     <Button title="Register now" type="submit" className="w-100" isLoadingMain={props.state.isLoadingMain}></Button>
-                    <button type="button" className="btn btn-link w-100 float-right" style={{ "padding": 0, "marginTop": 10 }} onClick={(e) => props.navigate("/sign-in")}>Go to Login</button>
+                    <button type="button" className="btn btn-link w-100 float-right" style={{ "padding": 0, "marginTop": 20 }} onClick={(e) => props.navigate("/sign-in")}>Go to Login</button>
                 </form>
             </div>
         </main>
