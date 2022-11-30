@@ -22,16 +22,23 @@ export const AuthRouteComponent = ({ children: Component, ...props }) => {
     const { getTokenInfo } = React.useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const notificationRef = React.useRef(null);
+    const addNotification = (value) => {
+        notificationRef.current.addItem(value);
+    }
     React.useEffect(() => {
         if (!getTokenInfo()) {
             navigate("/sign-in");
         }
     }, [props?.location?.pathname, getTokenInfo, navigate]);
-    return <Component
-        {...props}
-        location={location}
-        navigate={navigate}
-    ></Component>;
+    return <>
+        <Toast ref={notificationRef} ></Toast>
+        <Component
+            {...props}
+            location={location}
+            navigate={navigate}
+            addNotification={addNotification}></Component>
+    </>;
 };
 
 export const RouteComponent = ({ children: Component, ...props }) => {

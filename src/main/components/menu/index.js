@@ -23,7 +23,7 @@ class Container extends React.Component {
         //console.log(target.id);
         //target.classList.toggle("open");
         if (target.parentElement.children && target.parentElement.children.length > 0) {
-            target.parentElement.children[0].classList.toggle("show");
+            target.parentElement.children[1].classList.toggle("show");
         }
     }
 
@@ -39,11 +39,15 @@ class Container extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="navbar-nav me-auto mb-2 mb-md-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
+                            <a className="nav-link active" aria-current="page" href="/home">Home</a>
                         </li>
-                        <li className="nav-item" onClick={(e) => this.handleOnClickMenuItem(e)}>
-                            <a className="nav-link" href="#">Link</a>
+                        <li className="nav-item dropdown" onClick={(e) => this.handleOnClickMenuItem(e)}>
+                            <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">User</a>
+                            <ul className="dropdown-menu">
+                                <li><a className="dropdown-item" href="/user/activate">Activate user</a></li>
+                            </ul>
                         </li>
+
                         <li className="nav-item">
                             <a className="nav-link disabled">Disabled</a>
                         </li>

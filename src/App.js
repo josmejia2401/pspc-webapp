@@ -6,6 +6,7 @@ import './App.css';
 import AuthLoading from './main/views/auth-loading';
 const AuthSignIn = React.lazy(() => import("./main/views/auth-sing-in"));
 const AuthSignUp = React.lazy(() => import("./main/views/auth-sing-up"));
+const UserActivate = React.lazy(() => import("./main/views/user-activate"));
 const Home = React.lazy(() => import("./main/views/home"));
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path="/sign-in" element={<RouteComponent children={AuthSignIn}></RouteComponent>} />
             <Route exact path="/sign-up" element={<RouteComponent children={AuthSignUp}></RouteComponent>} />
             <Route exact path="/home" element={<AuthRouteComponent children={Home}></AuthRouteComponent>} />
+            <Route exact path="/user/activate" element={<AuthRouteComponent children={UserActivate}></AuthRouteComponent>} />
             <Route path="*" element={<Navigate to={"/sign-in"} replace></Navigate>} />
           </Routes>
         </React.Suspense>
