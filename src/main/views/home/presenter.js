@@ -3,7 +3,7 @@ import "./style.css";
 import Menu from "../../components/menu";
 const Presenter = props => (
     <>
-       <Menu></Menu>
+       <Menu {...props}></Menu>
     </>
 );
 

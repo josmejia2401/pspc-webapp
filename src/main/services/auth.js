@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { buildHeaders, setAccessToken } from '../transversal/auth';
+import { buildHeaders, setAccessToken, cleanAll } from '../transversal/auth';
 import { CustomError } from '../transversal/error';
 import Constants from "../transversal/constants";
 
@@ -29,16 +29,16 @@ export const signIn = async (payload) => {
 
 
 
-export const signUp = async (payload) => {
+export const signOut = async () => {
     try {
         const authHeaders = buildHeaders();
-        const res = await axios.post(`${Constants.API.auth.signUp}`, payload, {
+        const res = await axios.post(`${Constants.API.auth.signOut}`, undefined, {
             headers: {
                 ...authHeaders
             },
         });
         const data = res.data;
-        setAccessToken(data["token"]);
+        cleanAll();
         return data;
     } catch (error) {
         console.error(error);

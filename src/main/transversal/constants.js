@@ -5,6 +5,7 @@ export default Object.freeze({
     API: {
         auth: {
             signIn: `${SECURITY_API_BASE}/dev/pspc/security/auth/sign-in`,
+            signOut: `${SECURITY_API_BASE}/dev/pspc/security/auth/sign-out`,
         },
         user: {
             create: `${USER_API_BASE}/dev/pspc/security/users`

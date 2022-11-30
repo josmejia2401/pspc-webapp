@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import { signOut } from "../../services/auth";
 
 class Container extends React.Component {
     constructor(props) {
@@ -8,6 +9,7 @@ class Container extends React.Component {
         }
         this.handleOnClickMenuItem = this.handleOnClickMenuItem.bind(this);
         this.handleOnClickMenu = this.handleOnClickMenu.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
 
     componentDidMount = () => { }
@@ -28,9 +30,17 @@ class Container extends React.Component {
     }
 
 
+    handleClose(e) {
+        signOut().then(() => {
+            this.props.navigate(0);
+        }).catch(error => {
+            this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
+        }).finally(() => this.setState({ isLoadingMain: false }));
+    }
+
     render() {
         return (<nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div className="container-fluid">
+            <div className="container-fluid" style={{ "paddingLeft": "15px", "paddingRight": "15px" }}>
                 <a className="navbar-brand" href="#">PSPC</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
                     onClick={(e) => this.handleOnClickMenu(e)}>
@@ -52,10 +62,17 @@ class Container extends React.Component {
                             <a className="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+
+                    <div className="btn-group dropleft">
+                        <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={(e) => this.handleOnClickMenuItem(e)}>
+                            Settings
+                        </button>
+                        <div className="dropdown-menu  dropdown-menu-rleft">
+                            <button className="dropdown-item" type="button" onClick={this.handleClose}>Sign out</button>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </nav>);

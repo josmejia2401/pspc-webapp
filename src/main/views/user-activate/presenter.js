@@ -4,7 +4,7 @@ import Menu from "../../components/menu";
 import "./style.css";
 const Presenter = props => (
     <div className=" d-flex flex-column h-100 w-100" style={{ "padding": "5px" }}>
-        <Menu></Menu>
+        <Menu {...props}></Menu>
         <main className="flex-shrink-0 form-signin m-auto">
             <div className="container">
                 <form className="g-3 needs-validation" onSubmit={props.handleSignIn} noValidate>
