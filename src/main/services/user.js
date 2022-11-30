@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { buildHeaders, setAccessToken } from '../transversal/auth';
+import { buildHeaders } from '../transversal/auth';
 import { CustomError } from '../transversal/error';
 import Constants from "../transversal/constants";
 
@@ -12,7 +12,6 @@ export const create = async (payload) => {
             },
         });
         const data = res.data;
-        setAccessToken(data["token"]);
         return data;
     } catch (error) {
         console.error(error);

@@ -27,7 +27,7 @@ class Container extends React.Component {
             const data = getJsonOfForm(form, { });
             create(data).then(_result => {
                 form.reset();
-                this.props.navigate("/home");
+                this.props.navigate(0);
             }).catch(error => {
                 this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
             }).finally(() => this.setState({ isLoadingMain: false }));
