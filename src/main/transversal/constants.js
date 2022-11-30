@@ -8,7 +8,8 @@ export default Object.freeze({
             signOut: `${SECURITY_API_BASE}/dev/pspc/security/auth/sign-out`,
         },
         user: {
-            create: `${USER_API_BASE}/dev/pspc/security/users`
+            create: `${USER_API_BASE}/dev/pspc/security/users`,
+            activate: `${USER_API_BASE}/dev/pspc/security/users-activate`,
         }
     }
 });
