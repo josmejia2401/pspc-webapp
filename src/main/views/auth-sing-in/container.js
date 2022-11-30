@@ -29,7 +29,7 @@ class Container extends React.Component {
                 form.reset();
                 this.props.navigate("/home");
             }).catch(error => {
-                this.props.addNotification({ typeToast: 'error', text: error.message });
+                this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
             }).finally(() => this.setState({ isLoadingMain: false }));
         }
         form.classList.add('was-validated');
