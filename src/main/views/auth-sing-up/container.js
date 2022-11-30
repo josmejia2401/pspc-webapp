@@ -27,7 +27,8 @@ class Container extends React.Component {
             const data = getJsonOfForm(form, { });
             create(data).then(_result => {
                 form.reset();
-                this.props.navigate(0);
+                this.props.addNotification({ typeToast: 'info', text: "User created", title: "EXITOSO" });
+                //this.props.navigate(0); reload page
             }).catch(error => {
                 this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
             }).finally(() => this.setState({ isLoadingMain: false }));
