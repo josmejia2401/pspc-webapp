@@ -13,10 +13,10 @@ class Container extends React.Component {
         this.state = {
             isLoadingMain: false
         };
-        this.handleSignIn = this.handleSignIn.bind(this);
+        this.handleSignUp = this.handleSignUp.bind(this);
     }
 
-    handleSignIn = async (e) => {
+    handleSignUp = async (e) => {
         e.preventDefault();
         e.stopPropagation();
         //const { setUserInfo, getUserInfo } = this.context;
@@ -39,7 +39,7 @@ class Container extends React.Component {
     render() {
         return <Presenter
             state={this.state}
-            handleSignIn={this.handleSignIn}
+            handleSignUp={this.handleSignUp}
             {...this.props}
         />;
     }
