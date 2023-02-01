@@ -9,7 +9,6 @@ const Presenter = props => (
             </div>
             <div className="forms-grid">
                 <div className="login">
-                    <span className="fas fa-sign-in-alt"></span>
                     <strong>Welcome</strong>
                     <span>Sign in with your account</span>
                     <form className="login-form needs-validation" onSubmit={props.handleSignIn} noValidate>
@@ -23,8 +22,8 @@ const Presenter = props => (
                                 <input type="password" className="form-text" id="password" name="password" required />
                             </div>
                             <div className="form-row button-login">
-                                <Button title="Login" type="submit" className="btn btn-login" isLoadingMain={props.state.isLoadingMain}></Button>
-                                <Button title="Register" type="submit" className="btn-register"></Button>
+                                <Button title="Login" type="submit" className="btn-login" isLoadingMain={props.state.isLoadingMain}></Button>
+                                <Button title="Register" type="button" className="btn-register"  onClick={(e) => props.navigate("/sign-up")}></Button>
                             </div>
                         </div>
                     </form>

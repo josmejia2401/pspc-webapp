@@ -97,6 +97,7 @@ a.brand-logo {
     margin-top: 30px;
     display: inline-block;
     text-align: center;
+    width: 100%;
 }
 
 .login .form .form-label {
@@ -149,7 +150,7 @@ a {
     text-decoration: none;
 }
 
-.btn {
+.btn-login {
     align-items: center;
     background: #4d61fc;
     border-radius: 6px;
@@ -157,9 +158,16 @@ a {
     color: #fff;
     display: unset;
     font-size: 16px;
-    padding: 15px 35px;
+    padding: 15px;
     font-weight: 500;
     margin: 5px;
+    width: 45%;
+}
+
+
+.btn-login:hover {
+    background: #fff;
+    color: #4d61fc;
 }
 
 .btn-register {
@@ -170,9 +178,10 @@ a {
     color: #4d61fc;
     display: unset;
     font-size: 16px;
-    padding: 15px 35px;
+    padding: 15px;
     font-weight: 500;
     margin: 5px;
+    width: 45%;
 }
 
 .btn-register:hover {
@@ -180,10 +189,6 @@ a {
     color: #fff;
 }
 
-.btn:hover {
-    background: #fff;
-    color: #4d61fc;
-}
 
 .copy-right p {
     color: #696687;

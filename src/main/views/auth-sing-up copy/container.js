@@ -1,7 +1,7 @@
 import React from 'react';
 import Presenter from './presenter';
 import { AuthContext } from "../../transversal/context";
-import { signIn } from "../../services/auth";
+import { create } from "../../services/user";
 import { getJsonOfForm } from "../../transversal/utils/form";
 
 class Container extends React.Component {
@@ -13,10 +13,10 @@ class Container extends React.Component {
         this.state = {
             isLoadingMain: false
         };
-        this.handleSignIn = this.handleSignIn.bind(this);
+        this.handleSignUp = this.handleSignUp.bind(this);
     }
 
-    handleSignIn = async (e) => {
+    handleSignUp = async (e) => {
         e.preventDefault();
         e.stopPropagation();
         //const { setUserInfo, getUserInfo } = this.context;
@@ -24,10 +24,11 @@ class Container extends React.Component {
         const isValid = form.checkValidity();
         if (isValid === true) {
             this.setState({ isLoadingMain: true });
-            const data = getJsonOfForm(form, { username: "", password: "" });
-            signIn(data).then(_result => {
+            const data = getJsonOfForm(form, { });
+            create(data).then(_result => {
                 form.reset();
-                this.props.navigate("/home");
+                this.props.addNotification({ typeToast: 'info', text: "User created", title: "EXITOSO" });
+                //this.props.navigate(0); reload page
             }).catch(error => {
                 this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
             }).finally(() => this.setState({ isLoadingMain: false }));
@@ -38,7 +39,7 @@ class Container extends React.Component {
     render() {
         return <Presenter
             state={this.state}
-            handleSignIn={this.handleSignIn}
+            handleSignUp={this.handleSignUp}
             {...this.props}
         />;
     }

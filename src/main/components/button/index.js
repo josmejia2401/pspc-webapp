@@ -27,7 +27,7 @@ class Container extends React.Component {
         const { isLoadingMain, type, title, className} = this.props;
         if (this.state.isLoading || isLoadingMain) {
             return (<button className={`${className}`} type="button" disabled={true}>
-                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span className="spinner-border spinner-border-sm loader-x" role="status" aria-hidden="true"></span>
                 <span className="visually-hidden">Loading...</span>
             </button>);
         }
