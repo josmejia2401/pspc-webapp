@@ -1,5 +1,5 @@
 import * as React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthRouteComponent, AuthProvider, RouteComponent } from "./main/transversal/context";
 import './App.css';
