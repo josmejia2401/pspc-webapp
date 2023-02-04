@@ -1,0 +1,10 @@
+.bd-footer a {
+    color: var(--bs-body-color);
+    text-decoration: none
+}
+
+.bd-footer a:hover,
+.bd-footer a:focus {
+    color: var(--bs-link-hover-color);
+    text-decoration: underline
+}

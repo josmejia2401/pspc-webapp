@@ -72,7 +72,7 @@ class Container extends React.Component {
                     <span className="material-icons" onClick={(e) => this.handleOnOpenMenuMobile(e)}>more_horiz</span>
                 </button>
 
-                <div className="offcanvas-lg offcanvas-end flex-grow-1" style={{ width: "100%" }} id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
+                <div className="offcanvas-lg offcanvas-end flex-grow-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
                     <div className="offcanvas-header px-4 pb-0">
                         <button type="button" className="navbar-toggler d-flex d-lg-none order-3 p-2" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar" >
                             <span className="material-icons" onClick={(e) => this.handleOnOpenMenuMobile(e)}>close</span>
@@ -83,10 +83,28 @@ class Container extends React.Component {
                         <hr className="d-lg-none text-white-50" />
                         <ul className="navbar-nav flex-row flex-wrap bd-navbar-nav">
                             <li className="nav-item col-6 col-lg-auto">
-                                <a className="nav-link py-2 px-0 px-lg-2" target="_blank" rel="noopener">Docs</a>
+                                <a className="nav-link py-2 px-0 px-lg-2" rel="noopener">
+                                    <span className="material-icons navbar-nav-svg">home</span>
+                                    <small className="ms-2">Home</small>
+                                </a>
                             </li>
                             <li className="nav-item col-6 col-lg-auto">
-                                <a className="nav-link py-2 px-0 px-lg-2 active">Icons</a>
+                                <a className="nav-link py-2 px-0 px-lg-2 active" href='/projects/view' rel="noopener">
+                                    <span className="material-icons navbar-nav-svg">splitscreen</span>
+                                    <small className="ms-2">Projects</small>
+                                </a>
+                            </li>
+                            <li className="nav-item col-6 col-lg-auto">
+                                <a className="nav-link py-2 px-0 px-lg-2 active" rel="noopener">
+                                    <span className="material-icons navbar-nav-svg">web_stories</span>
+                                    <small className="ms-2">User history</small>
+                                </a>
+                            </li>
+                            <li className="nav-item col-6 col-lg-auto">
+                                <a className="nav-link py-2 px-0 px-lg-2 active" rel="noopener">
+                                    <span className="material-icons navbar-nav-svg">task</span>
+                                    <small className="d-lg-none ms-2">Tasks</small>
+                                </a>
                             </li>
                         </ul>
 

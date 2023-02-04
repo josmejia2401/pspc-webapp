@@ -5,3 +5,110 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.bd-navbar {
+    padding: .75rem 0;
+    background-color: #1e90ff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.15)
+}
+
+
+.bd-navbar .offcanvas-lg {
+    width: 100%;
+    background-color: #1e90ff;
+    border-left: 0
+}
+
+@media (max-width: 992px) {
+    .bd-navbar .offcanvas-lg {
+        box-shadow: 0 1rem 3rem rgba(var(--bs-body-color-rgb), 0.175)
+    }
+}
+
+
+.bd-navbar .navbar-toggler {
+    padding: 0;
+    margin-right: -.5rem;
+    border: 0
+}
+
+.bd-navbar .navbar-toggler:first-child {
+    margin-left: -.5rem
+}
+
+.bd-navbar .navbar-toggler .bi {
+    width: 1.5rem;
+    height: 1.5rem
+}
+
+.bd-navbar .navbar-toggler:focus {
+    box-shadow: none
+}
+
+.bd-navbar .navbar-brand {
+    transition: .2s ease-in-out transform
+}
+
+.bd-navbar .navbar-brand:hover {
+    transform: rotate(-5deg) scale(1.1)
+}
+
+.bd-navbar .navbar-toggler,
+.bd-navbar .nav-link {
+    padding-right: .25rem;
+    padding-left: .25rem;
+    color: rgba(255, 255, 255, 0.85)
+}
+
+.bd-navbar .navbar-toggler:hover,
+.bd-navbar .navbar-toggler:focus,
+.bd-navbar .nav-link:hover,
+.bd-navbar .nav-link:focus {
+    color: #fff
+}
+
+.bd-navbar .navbar-toggler.active,
+.bd-navbar .nav-link.active {
+    font-weight: 600;
+    color: #fff
+}
+
+
+.bd-navbar .dropdown-menu {
+    --bs-dropdown-min-width: 12rem;
+    --bs-dropdown-padding-x: .25rem;
+    --bs-dropdown-padding-y: .25rem;
+    --bs-dropdown-link-hover-bg: rgba(var(--bd-violet-rgb), .1);
+    --bs-dropdown-link-active-bg: rgba(var(--bd-violet-rgb), 1);
+    --bs-dropdown-font-size: .875rem;
+    font-size: .875rem;
+    border-radius: .5rem;
+    box-shadow: 0 0.5rem 1rem rgba(var(--bs-body-color-rgb), 0.15)
+}
+
+.bd-navbar .dropdown-menu li+li {
+    margin-top: .125rem
+}
+
+.bd-navbar .dropdown-menu .dropdown-item {
+    border-radius: .25rem
+}
+
+.bd-navbar .dropdown-menu .dropdown-item:active .bi {
+    color: inherit !important
+}
+
+.bd-navbar .dropdown-menu .active {
+    font-weight: 600
+}
+
+.bd-navbar .dropdown-menu .active .bi {
+    display: block !important
+}
+
+
+
+
+.material-icons {
+    vertical-align: middle;
+}
