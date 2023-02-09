@@ -11,9 +11,14 @@ class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoadingMain: false
+            isLoadingMain: false,
+            showDialog: false
         };
         this.handleSignIn = this.handleSignIn.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ showDialog: true });
     }
 
     handleSignIn = async (e) => {

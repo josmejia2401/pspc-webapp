@@ -2,9 +2,12 @@ import React from "react";
 import "./style.css";
 import Menu from "../../components/menu";
 import Footer from "../../components/footer";
+import Modal from "../../components/modal";
+
 const Presenter = props => (
     <>
         <Menu {...props}></Menu>
+        <Modal show={props.state.showDialog}></Modal>
         <main className="container icon-examples" id="content">
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb my-4 p-0">
