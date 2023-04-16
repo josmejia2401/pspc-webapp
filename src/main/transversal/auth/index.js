@@ -22,11 +22,13 @@ export const getAccessToken = () => {
 }
 
 export const setAccessToken = (accessToken) => {
-    return Storage.set("ACCESS_TOKEN", JSON.stringify(accessToken));
+    return Storage.set("ACCESS_TOKEN", accessToken);
 }
 
 export const getTokenInfo = () => {
     const accessToken = Storage.get("ACCESS_TOKEN");
+    console.log(">>>>>>>>>>>>>>>>>>>>", accessToken);
+    console.log(">>>>>>>>>>>>>>>>>>>>", TokenUtil.decodeTokenJwt(accessToken));
     if (accessToken && TokenUtil.isValidToken(accessToken)) {
         return TokenUtils.getInfoToken(accessToken);
     }
@@ -43,10 +45,12 @@ export const buildHeaders = () => {
     if (accessToken) {
         return {
             Authorization: `Bearer ${getAccessToken()}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": '*'
         };
     }
     return {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": '*'
     };
 }

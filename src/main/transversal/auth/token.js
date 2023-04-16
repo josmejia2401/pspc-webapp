@@ -18,6 +18,9 @@ export default class TokenUtil {
 
     static decodeTokenJwt(token) {
         const newToken = TokenUtil.getToken(token);
+        if (Utils.isEmpty(newToken)) {
+            return;
+        }
         const values = newToken.split(".");
         const encodedHeader = values[0];
         const encodedPayload = values[1];
@@ -38,7 +41,8 @@ export default class TokenUtil {
     static isValidToken(authorization) {
         const tokenBase = TokenUtil.getToken(authorization);
         const infoToken = TokenUtil.decodeTokenJwt(tokenBase);
-        if (new Date().getTime() > infoToken.payload.exp) {
+        //epoch
+        if (new Date().getTime() > (infoToken.payload.exp * 1000)) {
             return false;
         }
         return true;

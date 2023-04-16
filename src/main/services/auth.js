@@ -12,7 +12,7 @@ export const signIn = async (payload) => {
             },
         });
         const data = res.data;
-        setAccessToken(data["token"]);
+        setAccessToken(data["accessToken"]);
         return data;
     } catch (error) {
         console.error(error);

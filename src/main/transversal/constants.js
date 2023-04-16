@@ -1,5 +1,5 @@
-const SECURITY_API_BASE = "https://g3xphpg3r8.execute-api.us-east-1.amazonaws.com";
-const USER_API_BASE = "https://ok8yoxqqfd.execute-api.us-east-1.amazonaws.com";
+const SECURITY_API_BASE = "https://z700n9652g.execute-api.us-east-1.amazonaws.com";
+const USER_API_BASE = "https://sz8o589y56.execute-api.us-east-1.amazonaws.com";
 
 export default Object.freeze({
     API: {
@@ -8,7 +8,7 @@ export default Object.freeze({
             signOut: `${SECURITY_API_BASE}/dev/pspc/security/auth/sign-out`,
         },
         user: {
-            create: `${USER_API_BASE}/dev/pspc/security/users`,
+            create: `${USER_API_BASE}/dev/pspc/clients/users`,
             activate: `${USER_API_BASE}/dev/pspc/security/users-activate`,
         }
     }
