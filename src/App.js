@@ -3,13 +3,28 @@ import * as React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthRouteComponent, AuthProvider, RouteComponent } from "./main/transversal/context";
 import './App.css';
-import AuthLoading from './main/views/auth-loading';
-const AuthSignIn = React.lazy(() => import("./main/views/auth-sing-in"));
-const AuthSignUp = React.lazy(() => import("./main/views/auth-sing-up"));
-const UserActivate = React.lazy(() => import("./main/views/user-activate"));
-const UserValidate = React.lazy(() => import("./main/views/user-validate"));
-const ProjectView = React.lazy(() => import("./main/views/project-view"));
-const Home = React.lazy(() => import("./main/views/home"));
+import AuthSignIn from './main/views/auth/sing-in';
+import AuthSignUp from './main/views/auth/sing-up';
+import ProjectView from './main/views/project/view';
+import Home from './main/views/home';
+//const Home = React.lazy(() => import("./main/views/home"));
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route exact path="/sign-in" element={<RouteComponent children={AuthSignIn}></RouteComponent>} />
+          <Route exact path="/sign-up" element={<RouteComponent children={AuthSignUp}></RouteComponent>} />
+          <Route exact path="/home" element={<AuthRouteComponent children={Home}></AuthRouteComponent>} />
+          <Route exact path="/projects/view" element={<AuthRouteComponent children={ProjectView}></AuthRouteComponent>} />
+          <Route path="*" element={<Navigate to={"/sign-in"} replace></Navigate>} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+}
+/*
 function App() {
   return (
     <AuthProvider>
@@ -25,20 +40,6 @@ function App() {
             <Route path="*" element={<Navigate to={"/sign-in"} replace></Navigate>} />
           </Routes>
         </React.Suspense>
-      </Router>
-    </AuthProvider>
-  );
-}
-/*
-function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route exact path="/sign-in" element={<RouteComponent children={AuthSignIn}></RouteComponent>} />
-          <Route exact path="/home" element={<AuthRouteComponent children={AuthLoading1} ></AuthRouteComponent>} />
-          <Route path="*" element={<Navigate to={"/sign-in"} replace></Navigate>} />
-        </Routes>
       </Router>
     </AuthProvider>
   );
