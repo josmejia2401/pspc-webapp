@@ -16,7 +16,7 @@ export const setUserInfo = (userInfo) => {
 export const getAccessToken = () => {
     const userInfo = Storage.get("ACCESS_TOKEN");
     if (userInfo) {
-        return JSON.parse(userInfo);
+        return userInfo;
     }
     return null;
 }
@@ -42,11 +42,12 @@ export const cleanAll = () => {
 
 export const buildHeaders = () => {
     const accessToken = getAccessToken();
+    console.log(">>>>>>>>>accessToken", accessToken);
     if (accessToken) {
         return {
-            Authorization: `Bearer ${getAccessToken()}`,
+            Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": '*'
+            "Access-Control-Allow-Origin": 'http://localhost:3000'
         };
     }
     return {

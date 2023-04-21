@@ -70,9 +70,7 @@ class Container extends React.Component {
                             <span className="fs-5">Bootstrap</span>
                         </a>
                         <ul className="list-unstyled small">
-                            <li className="mb-2">Designed and built with all the love in the world by the <a
-                                href="https://getbootstrap.com/docs/5.3/about/team/">Bootstrap team</a> with the help of <a
-                                    href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</li>
+                            <li className="mb-2">Trabajando para ti</li>
                             <li className="mb-2">Code licensed <a href="https://github.com/twbs/bootstrap/blob/main/LICENSE" target="_blank"
                                 rel="license noopener">MIT</a>, docs <a href="https://creativecommons.org/licenses/by/3.0/"
                                     target="_blank" rel="license noopener">CC BY 3.0</a>.</li>

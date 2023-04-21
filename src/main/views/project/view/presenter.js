@@ -44,34 +44,24 @@ const Presenter = props => (
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Proyecto #1</td>
-                                        <td>2021-01-01</td>
-                                        <td></td>
-                                        <td className="text-success"> 82.00% <i className="ti-arrow-up"></i></td>
-                                        <td><label className="badge text-bg-success">Completed</label></td>
-                                        <td>
-                                            <div className="progress" role="progressbar"
-                                                style={{ height: "5px" }} aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                <div class="progress-bar bg-success" style={{ "width": "25%" }}></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Proyecto #2</td>
-                                        <td>2022-12-31</td>
-                                        <td>2023-01-01</td>
-                                        <td className="text-success"> 82.00% <i className="ti-arrow-up"></i></td>
-                                        <td><label className="badge text-bg-success">Completed</label></td>
-                                        <td>
-                                            <div className="progress" role="progressbar"
-                                                style={{ height: "5px" }} aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                <div class="progress-bar bg-success" style={{ "width": "25%" }}></div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    {props.state.data.map((item, i) => {
+                                        return (
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>{item.name}</td>
+                                                <td>{item.startedAt}</td>
+                                                <td>{item.completedAt}</td>
+                                                <td className="text-success"> 82.00% <i className="ti-arrow-up"></i></td>
+                                                <td><label className="badge text-bg-success">{item.status}</label></td>
+                                                <td>
+                                                    <div className="progress" role="progressbar"
+                                                        style={{ height: "5px" }} aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar bg-success" style={{ "width": "25%" }}></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                         </div>

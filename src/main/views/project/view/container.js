@@ -1,7 +1,7 @@
 import React from 'react';
 import Presenter from './presenter';
 import { AuthContext } from "../../../transversal/context";
-import { signIn } from "../../../services/auth";
+import { getAll } from "../../../services/project";
 import { getJsonOfForm } from "../../../transversal/utils/form";
 
 class Container extends React.Component {
@@ -11,9 +11,21 @@ class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoadingMain: false
+            isLoadingMain: false,
+            data: []
         };
-        this.handleSignIn = this.handleSignIn.bind(this);
+        this.onLoadData = this.onLoadData.bind(this);
+    }
+
+    componentDidMount() {
+        console.log(">>>>>>>>>>>>>>>>");
+        this.onLoadData();
+    }
+
+    onLoadData = async () => {
+        getAll().then(data => {
+            this.setState({ data });
+        }).catch(e => console.log(e));
     }
 
     handleSignIn = async (e) => {
@@ -25,12 +37,12 @@ class Container extends React.Component {
         if (isValid === true) {
             this.setState({ isLoadingMain: true });
             const data = getJsonOfForm(form, { username: "", password: "" });
-            signIn(data).then(_result => {
+            /*signIn(data).then(_result => {
                 form.reset();
                 this.props.navigate("/home");
             }).catch(error => {
                 this.props.addNotification({ typeToast: 'error', text: error.message });
-            }).finally(() => this.setState({ isLoadingMain: false }));
+            }).finally(() => this.setState({ isLoadingMain: false }));*/
         }
         form.classList.add('was-validated');
     }
@@ -38,7 +50,6 @@ class Container extends React.Component {
     render() {
         return <Presenter
             state={this.state}
-            handleSignIn={this.handleSignIn}
             {...this.props}
         />;
     }
