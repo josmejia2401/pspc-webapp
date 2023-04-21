@@ -3,11 +3,13 @@ import "./style.css";
 import Menu from "../../../components/menu";
 import Footer from "../../../components/footer";
 import Modal from "../../../components/modal";
+import Create from "../create";
 
 const Presenter = props => (
     <>
         <Menu {...props}></Menu>
         <Modal></Modal>
+        {props.state.viewCreateItem === true && (<Create {...props}></Create>)}
         <main className="container icon-examples" id="content">
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb my-4 p-0">
@@ -34,6 +36,14 @@ const Presenter = props => (
                             <table className="table table-hover">
                                 <thead>
                                     <tr>
+                                        <th colSpan="5"></th>
+                                        <th colSpan="2">
+                                            <button type="button" className="btn btn-primary" onClick={props.handleOnCreateItem}>+</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Started</th>
@@ -46,7 +56,7 @@ const Presenter = props => (
                                 <tbody>
                                     {props.state.data.map((item, i) => {
                                         return (
-                                            <tr>
+                                            <tr key={i}>
                                                 <th scope="row">1</th>
                                                 <td>{item.name}</td>
                                                 <td>{item.startedAt}</td>
@@ -56,7 +66,7 @@ const Presenter = props => (
                                                 <td>
                                                     <div className="progress" role="progressbar"
                                                         style={{ height: "5px" }} aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-bar bg-success" style={{ "width": "25%" }}></div>
+                                                        <div htmlFor="progress-bar bg-success" style={{ "width": "25%" }}></div>
                                                     </div>
                                                 </td>
                                             </tr>

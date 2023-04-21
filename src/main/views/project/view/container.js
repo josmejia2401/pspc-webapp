@@ -12,13 +12,14 @@ class Container extends React.Component {
         super(props);
         this.state = {
             isLoadingMain: false,
-            data: []
+            data: [],
+            viewCreateItem: false,
         };
         this.onLoadData = this.onLoadData.bind(this);
+        this.handleOnCreateItem = this.handleOnCreateItem.bind(this);
     }
 
     componentDidMount() {
-        console.log(">>>>>>>>>>>>>>>>");
         this.onLoadData();
     }
 
@@ -26,6 +27,10 @@ class Container extends React.Component {
         getAll().then(data => {
             this.setState({ data });
         }).catch(e => console.log(e));
+    }
+
+    handleOnCreateItem = async () => {
+        this.setState({ viewCreateItem: !this.state.viewCreateItem });
     }
 
     handleSignIn = async (e) => {
@@ -51,6 +56,7 @@ class Container extends React.Component {
         return <Presenter
             state={this.state}
             {...this.props}
+            handleOnCreateItem={this.handleOnCreateItem}
         />;
     }
 }
