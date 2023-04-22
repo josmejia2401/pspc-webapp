@@ -14,7 +14,7 @@ export const getAll = async () => {
         });
         return res.data;
     } catch (error) {
-        console.error(error);
+        console.error("error getAll", error);
         if (error.response) {
             console.error(error.response.data);
             console.error(error.response.status);
