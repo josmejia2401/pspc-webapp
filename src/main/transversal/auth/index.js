@@ -28,7 +28,7 @@ export const setAccessToken = (accessToken) => {
 export const getTokenInfo = () => {
     const accessToken = Storage.get("ACCESS_TOKEN");
     console.log(">>>>>>>>>>>>>>>>>>>>", accessToken);
-    console.log(">>>>>>>>>>>>>>>>>>>>", TokenUtil.decodeTokenJwt(accessToken));
+    console.log(">>>>>>>>>>>>>>>>>>>>", JSON.stringify(TokenUtil.decodeTokenJwt(accessToken)));
     if (accessToken && TokenUtil.isValidToken(accessToken)) {
         return TokenUtils.getInfoToken(accessToken);
     }
