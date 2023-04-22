@@ -1,12 +1,10 @@
 import axios from 'axios';
-import { buildHeaders, setAccessToken, cleanAll } from '../transversal/auth';
-import { CustomError } from '../transversal/error';
+import { buildAndThrowNewError, buildHeaders } from '../transversal/auth';
 import Constants from "../transversal/constants";
 
 export const getAll = async () => {
     try {
         const authHeaders = buildHeaders();
-        console.log("authHeaders", authHeaders);
         const res = await axios.get(`${Constants.API.projects.getAll}`, {
             headers: {
                 ...authHeaders
@@ -14,17 +12,8 @@ export const getAll = async () => {
         });
         return res.data;
     } catch (error) {
-        console.error("error getAll", JSON.stringify(error.data || {}));
-
-console.error("error getAll", JSON.stringify(error.response || {}));
-
-        if (error.response) {
-            console.error(error.response.data);
-            console.error(error.response.status);
-            console.error(error.response.headers);
-            throw new CustomError(error.response.data["message"], error.response.data["code"], error.response.status);
-        }
-        throw error;
+        console.error(error);
+        buildAndThrowNewError(error);
     }
 }
 
@@ -39,13 +28,7 @@ export const getById = async (id) => {
         return res.data;
     } catch (error) {
         console.error(error);
-        if (error.response) {
-            console.error(error.response.data);
-            console.error(error.response.status);
-            console.error(error.response.headers);
-            throw new CustomError(error.response.data["message"], error.response.data["code"], error.response.status);
-        }
-        throw error;
+        buildAndThrowNewError(error);
     }
 }
 
@@ -60,13 +43,7 @@ export const create = async (payload) => {
         return res.data;
     } catch (error) {
         console.error(error);
-        if (error.response) {
-            console.error(error.response.data);
-            console.error(error.response.status);
-            console.error(error.response.headers);
-            throw new CustomError(error.response.data["message"], error.response.data["code"], error.response.status);
-        }
-        throw error;
+        buildAndThrowNewError(error);
     }
 }
 
@@ -81,20 +58,14 @@ export const deleteById = async (id) => {
         return res.data;
     } catch (error) {
         console.error(error);
-        if (error.response) {
-            console.error(error.response.data);
-            console.error(error.response.status);
-            console.error(error.response.headers);
-            throw new CustomError(error.response.data["message"], error.response.data["code"], error.response.status);
-        }
-        throw error;
+        buildAndThrowNewError(error);
     }
 }
 
-export const update = async (id, payload) => {
+export const updateById = async (id, payload) => {
     try {
         const authHeaders = buildHeaders();
-        const res = await axios.update(`${Constants.API.projects.update.replace(":id", id)}`, payload, {
+        const res = await axios.put(`${Constants.API.projects.update.replace(":id", id)}`, payload, {
             headers: {
                 ...authHeaders
             },
@@ -102,12 +73,6 @@ export const update = async (id, payload) => {
         return res.data;
     } catch (error) {
         console.error(error);
-        if (error.response) {
-            console.error(error.response.data);
-            console.error(error.response.status);
-            console.error(error.response.headers);
-            throw new CustomError(error.response.data["message"], error.response.data["code"], error.response.status);
-        }
-        throw error;
+        buildAndThrowNewError(error);
     }
 }

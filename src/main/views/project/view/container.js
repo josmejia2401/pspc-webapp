@@ -2,7 +2,6 @@ import React from 'react';
 import Presenter from './presenter';
 import { AuthContext } from "../../../transversal/context";
 import { getAll } from "../../../services/project";
-import { getJsonOfForm } from "../../../transversal/utils/form";
 
 class Container extends React.Component {
 
@@ -14,9 +13,15 @@ class Container extends React.Component {
             isLoadingMain: false,
             data: [],
             viewCreateItem: false,
+            viewEditItem: false,
+            viewDeleteItem: false,
+            itemSelected: undefined,
         };
         this.onLoadData = this.onLoadData.bind(this);
         this.handleOnCreateItem = this.handleOnCreateItem.bind(this);
+        this.handleOnSelectedItem = this.handleOnSelectedItem.bind(this);
+        this.handleOnEditItem = this.handleOnEditItem.bind(this);
+        this.handleOnDeleteItem = this.handleOnDeleteItem.bind(this);
     }
 
     componentDidMount() {
@@ -33,30 +38,30 @@ class Container extends React.Component {
         this.setState({ viewCreateItem: !this.state.viewCreateItem });
     }
 
-    handleSignIn = async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        //const { setUserInfo, getUserInfo } = this.context;
-        const form = e.target;
-        const isValid = form.checkValidity();
-        if (isValid === true) {
-            this.setState({ isLoadingMain: true });
-            const data = getJsonOfForm(form, { username: "", password: "" });
-            /*signIn(data).then(_result => {
-                form.reset();
-                this.props.navigate("/home");
-            }).catch(error => {
-                this.props.addNotification({ typeToast: 'error', text: error.message });
-            }).finally(() => this.setState({ isLoadingMain: false }));*/
+    handleOnEditItem = async () => {
+        this.setState({ viewEditItem: !this.state.viewEditItem });
+    }
+
+    handleOnDeleteItem = async () => {
+        this.setState({ viewDeleteItem: !this.state.viewDeleteItem });
+    }
+
+    async handleOnSelectedItem(e, item) {
+        if (this.state.itemSelected && this.state.itemSelected.id === item.id) {
+            this.setState({ itemSelected: undefined });
+        } else {
+            this.setState({ itemSelected: item });
         }
-        form.classList.add('was-validated');
     }
 
     render() {
         return <Presenter
             state={this.state}
-            {...this.props}
+            parentProps={this.props}
             handleOnCreateItem={this.handleOnCreateItem}
+            handleOnSelectedItem={this.handleOnSelectedItem}
+            handleOnEditItem={this.handleOnEditItem}
+            handleOnDeleteItem={this.handleOnDeleteItem}
         />;
     }
 }

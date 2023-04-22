@@ -19,5 +19,9 @@ export default Object.freeze({
             update: `${PROJECT_API_BASE}/dev/pspc/manage/projects/:id`,
             delete: `${PROJECT_API_BASE}/dev/pspc/manage/projects/:id`,
         }
+    },
+    STATUS: {
+        1: "ACTIVE",
+        2: "INACTIVE"
     }
 });

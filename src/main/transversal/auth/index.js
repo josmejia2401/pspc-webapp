@@ -1,6 +1,7 @@
 import Storage from "../storage";
 import TokenUtils from "../auth/token";
 import TokenUtil from "../auth/token";
+import { CustomError } from "../error";
 export const getUserInfo = () => {
     const userInfo = Storage.get("USER_INFO");
     if (userInfo) {
@@ -27,8 +28,6 @@ export const setAccessToken = (accessToken) => {
 
 export const getTokenInfo = () => {
     const accessToken = Storage.get("ACCESS_TOKEN");
-    console.log(">>>>>>>>>>>>>>>>>>>>", accessToken);
-    console.log(">>>>>>>>>>>>>>>>>>>>", JSON.stringify(TokenUtil.decodeTokenJwt(accessToken)));
     if (accessToken && TokenUtil.isValidToken(accessToken)) {
         return TokenUtils.getInfoToken(accessToken);
     }
@@ -40,9 +39,21 @@ export const cleanAll = () => {
     return Storage.clear();
 }
 
+export const buildAndThrowNewError = (error) => {
+    if (error && error.response) {
+        if (error.response.status === 401 || error.response.status === 403) {
+            cleanAll();
+        }
+        console.error(error.response.data);
+        console.error(error.response.status);
+        console.error(error.response.headers);
+        throw new CustomError(error.response.data["message"], error.response.data["code"], error.response.status);
+    }
+    throw error;
+}
+
 export const buildHeaders = () => {
     const accessToken = getAccessToken();
-    console.log(">>>>>>>>>accessToken", accessToken);
     if (accessToken) {
         return {
             Authorization: `Bearer ${accessToken}`,
