@@ -14,9 +14,9 @@ export const getAll = async () => {
         });
         return res.data;
     } catch (error) {
-        console.error("error getAll", JSON.strngify(error.data || {}));
+        console.error("error getAll", JSON.stringify(error.data || {}));
 
-console.error("error getAll", JSON.strngify(error.response || {}));
+console.error("error getAll", JSON.stringify(error.response || {}));
 
         if (error.response) {
             console.error(error.response.data);
