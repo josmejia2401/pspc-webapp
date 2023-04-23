@@ -6,6 +6,7 @@ import './App.css';
 import AuthSignIn from './main/views/auth/sing-in';
 import AuthSignUp from './main/views/auth/sing-up';
 import ProjectView from './main/views/project/view';
+import UserStoryView from './main/views/user-story/view';
 import Home from './main/views/home';
 //const Home = React.lazy(() => import("./main/views/home"));
 
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/sign-up" element={<RouteComponent children={AuthSignUp}></RouteComponent>} />
           <Route exact path="/home" element={<AuthRouteComponent children={Home}></AuthRouteComponent>} />
           <Route exact path="/projects/view" element={<AuthRouteComponent children={ProjectView}></AuthRouteComponent>} />
+          <Route exact path="/user-story/view" element={<AuthRouteComponent children={UserStoryView}></AuthRouteComponent>} />
           <Route path="*" element={<Navigate to={"/sign-in"} replace></Navigate>} />
         </Routes>
       </Router>

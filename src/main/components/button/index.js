@@ -15,10 +15,16 @@ class Container extends React.Component {
     }
 
     async handleOnPress(e, ...params) {
-        const { onPress } = this.props;
+        const { onPress, onClick } = this.props;
         if (onPress) {
             this.setState({ isLoading: true });
             await onPress(e, params);
+            this.setState({ isLoading: false });
+            return;
+        }
+        if (onClick) {
+            this.setState({ isLoading: true });
+            await onClick(e, params);
             this.setState({ isLoading: false });
         }
     }
