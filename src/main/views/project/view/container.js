@@ -10,7 +10,7 @@ class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoadingMain: false,
+            isLoading: false,
             data: [],
             viewCreateItem: false,
             viewEditItem: false,
@@ -29,9 +29,12 @@ class Container extends React.Component {
     }
 
     onLoadData = async () => {
+        this.setState({ isLoading: true });
         getAll().then(data => {
             this.setState({ data });
-        }).catch(e => console.log(e));
+        }).catch(e => {
+            this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
+        }).finally(() => this.setState({ isLoading: false }));
     }
 
     handleOnCreateItem = async () => {
@@ -62,6 +65,7 @@ class Container extends React.Component {
             handleOnSelectedItem={this.handleOnSelectedItem}
             handleOnEditItem={this.handleOnEditItem}
             handleOnDeleteItem={this.handleOnDeleteItem}
+            onLoadData={this.onLoadData}
         />;
     }
 }

@@ -10,8 +10,7 @@ class Container extends React.Component {
         this.handleOnOpenMenuMobileItem = this.handleOnOpenMenuMobileItem.bind(this);
         this.handleOnOpenMenuMobile = this.handleOnOpenMenuMobile.bind(this);
         this.handleOnOpenConfigUser = this.handleOnOpenConfigUser.bind(this);
-
-
+        this.handleClose = this.handleClose.bind(this);
     }
 
     componentDidMount = () => {
@@ -57,7 +56,6 @@ class Container extends React.Component {
         return (<header className="navbar navbar-expand-lg navbar-dark bd-navbar sticky-top">
             <nav className="container-xxl bd-gutter flex-wrap flex-lg-nowrap" aria-label="Main navigation">
                 <div className="d-lg-none" style={{ "width": "2.25rem" }}></div>
-
                 <a className="navbar-brand p-0 me-0 me-lg-2" href="https://getbootstrap.com/" aria-label="Bootstrap">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" className="d-block my-1" viewBox="0 0 118 94"
                         role="img">
@@ -67,18 +65,15 @@ class Container extends React.Component {
                             fill="currentColor" />
                     </svg>
                 </a>
-
                 <button className="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="material-icons" onClick={(e) => this.handleOnOpenMenuMobile(e)}>more_horiz</span>
                 </button>
-
                 <div className="offcanvas-lg offcanvas-end flex-grow-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
                     <div className="offcanvas-header px-4 pb-0">
                         <button type="button" className="navbar-toggler d-flex d-lg-none order-3 p-2" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar" >
                             <span className="material-icons" onClick={(e) => this.handleOnOpenMenuMobile(e)}>close</span>
                         </button>
                     </div>
-
                     <div className="offcanvas-body p-4 pt-0 p-lg-0">
                         <hr className="d-lg-none text-white-50" />
                         <ul className="navbar-nav flex-row flex-wrap bd-navbar-nav">
@@ -139,12 +134,11 @@ class Container extends React.Component {
                                 <button className="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
                                     <span className="material-icons" onClick={(e) => this.handleOnOpenConfigUser(e)}>account_circle</span>
                                 </button>
-                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="idConfigUser" id="idConfigUser" style={{ "--bs-dropdown-min-width": "8rem" }} data-bs-popper="static">
+                                <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="idConfigUser" id="idConfigUser" style={{ "--bs-dropdown-min-width": "8rem" }} data-bs-popper="static" >
                                     <li>
-                                        <button type="button" className="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
-                                            <span className="material-icons me-2 opacity-50">person</span>
-                                            Profile
-                                        </button>
+                                        <a className="dropdown-item" href="#" onClick={this.handleClose}>
+                                            <span className="material-icons me-2 opacity-50">logout</span> Cerrar sesión
+                                        </a>
                                     </li>
                                 </ul>
                             </li>

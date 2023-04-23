@@ -11,7 +11,8 @@ class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoadingMain: false
+            isLoadingAction: false,
+            isLoading: false,
         };
         this.handleOnCreate = this.handleOnCreate.bind(this);
         this.handleOnHide = this.handleOnHide.bind(this);
@@ -24,7 +25,7 @@ class Container extends React.Component {
         const form = e.target;
         const isValid = form.checkValidity();
         if (isValid === true) {
-            this.setState({ isLoadingMain: true });
+            this.setState({ isLoadingAction: true });
             const data = getJsonOfForm(form, {});
             data.status = Number(data.status);
             if (data.startedAt === "") {
@@ -39,7 +40,7 @@ class Container extends React.Component {
                 this.handleOnHide();
             }).catch(error => {
                 this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
-            }).finally(() => this.setState({ isLoadingMain: false }));
+            }).finally(() => this.setState({ isLoadingAction: false }));
         }
         form.classList.add('was-validated');
     }

@@ -36,23 +36,28 @@ const Presenter = props => (
             <div className="row gx-lg-5">
                 <div className="col-lg-12 mb-4">
                     <h2>Proyectos</h2>
-                    <div className="p-3 p-md-4 border rounded-3 icon-demo-examples">
+                    <div className="p-3 p-md-4 border rounded-3 icon-demo-examples justify-content-center">
                         <div className="table-responsive">
                             <table className="table table-hover">
                                 <thead>
                                     <tr>
                                         <th colSpan="3">
-                                            <span className="material-icons material-symbols-outlined" onClick={props.handleOnCreateItem}>add</span>
+                                            <span className="material-icons material-symbols-outlined" onClick={props.onLoadData}>refresh</span>
+                                            <span className="material-icons material-symbols-outlined" onClick={props.handleOnCreateItem} style={{
+                                                marginLeft: 5
+                                            }}>add</span>
                                             {
                                                 props.state.itemSelected && <>
-                                                    <span className="material-icons material-symbols-outlined" onClick={props.handleOnEditItem}>edit</span>
-                                                    <span className="material-icons material-symbols-outlined" onClick={props.handleOnDeleteItem}>delete</span>
+                                                    <span className="material-icons material-symbols-outlined" onClick={props.handleOnEditItem} style={{
+                                                        marginLeft: 5
+                                                    }}>edit</span>
+                                                    <span className="material-icons material-symbols-outlined" onClick={props.handleOnDeleteItem} style={{
+                                                        marginLeft: 5
+                                                    }}>delete</span>
                                                 </>
                                             }
                                         </th>
-                                        <th colSpan="2">
-
-                                        </th>
+                                        <th colSpan="3"></th>
                                     </tr>
                                 </thead>
                                 <thead>
@@ -67,23 +72,35 @@ const Presenter = props => (
                                 </thead>
                                 <tbody>
                                     {
-                                        props.state.data.map((item, i) => {
-                                            return (
-                                                <tr key={i} onClick={(e) => props.handleOnSelectedItem(e, item)} style={{
-                                                    backgroundColor: `${props.state.itemSelected && item.id === props.state.itemSelected.id ? '#ddd' : 'unset'}`
-                                                }}>
-                                                    <th scope="row">{i + 1}</th>
-                                                    <td>{item.name}</td>
-                                                    <td>{item.description}</td>
-                                                    <td>{item.startedAt}</td>
-                                                    <td>{item.completedAt}</td>
-                                                    <td>
-                                                        {Constants.STATUS[item.status] === "ACTIVE" && <label className="badge text-bg-success">{Constants.STATUS[item.status]}</label>}
-                                                        {Constants.STATUS[item.status] !== "ACTIVE" && <label className="badge text-bg-danger">{Constants.STATUS[item.status]}</label>}
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
+                                        props.state.isLoading === true ? (
+                                            <tr>
+                                                <th scope="col" colSpan="6">
+                                                    <div className="text-center">
+                                                        <div className="spinner-border" role="status">
+                                                            <span className="visually-hidden">Loading...</span>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        ) : (
+                                            props.state.data.map((item, i) => {
+                                                return (
+                                                    <tr key={i} onClick={(e) => props.handleOnSelectedItem(e, item)} style={{
+                                                        backgroundColor: `${props.state.itemSelected && item.id === props.state.itemSelected.id ? '#ddd' : 'unset'}`
+                                                    }}>
+                                                        <th scope="row">{i + 1}</th>
+                                                        <td>{item.name}</td>
+                                                        <td>{item.description}</td>
+                                                        <td>{item.startedAt}</td>
+                                                        <td>{item.completedAt}</td>
+                                                        <td>
+                                                            {Constants.STATUS[item.status] === "ACTIVE" && <label className="badge text-bg-success">{Constants.STATUS[item.status]}</label>}
+                                                            {Constants.STATUS[item.status] !== "ACTIVE" && <label className="badge text-bg-danger">{Constants.STATUS[item.status]}</label>}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })
+                                        )
                                     }
                                 </tbody>
                             </table>

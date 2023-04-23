@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { buildHeaders, setAccessToken, cleanAll } from '../transversal/auth';
-import { CustomError } from '../transversal/error';
+import { buildHeaders, setAccessToken, cleanAll, buildAndThrowNewError } from '../transversal/auth';
 import Constants from "../transversal/constants";
 
 export const signIn = async (payload) => {
@@ -16,14 +15,7 @@ export const signIn = async (payload) => {
         return data;
     } catch (error) {
         console.error(error);
-        if (error.response) {
-            // Request made and server responded
-            console.error(error.response.data);
-            console.error(error.response.status);
-            console.error(error.response.headers);
-            throw new CustomError(error.response.data["message"], error.response.data["code"], error.response.status);
-        }
-        throw error;
+        buildAndThrowNewError(error);
     }
 }
 
@@ -32,7 +24,7 @@ export const signIn = async (payload) => {
 export const signOut = async () => {
     try {
         const authHeaders = buildHeaders();
-        const res = await axios.post(`${Constants.API.auth.signOut}`, undefined, {
+        const res = await axios.post(`${Constants.API.auth.signOut}`, {}, {
             headers: {
                 ...authHeaders
             },
@@ -42,13 +34,6 @@ export const signOut = async () => {
         return data;
     } catch (error) {
         console.error(error);
-        if (error.response) {
-            // Request made and server responded
-            console.error(error.response.data);
-            console.error(error.response.status);
-            console.error(error.response.headers);
-            throw new CustomError(error.response.data["message"], error.response.data["code"], error.response.status);
-        }
-        throw error;
+        buildAndThrowNewError(error);
     }
 }

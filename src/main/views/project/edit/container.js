@@ -11,7 +11,8 @@ class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoadingMain: false,
+            isLoading: false,
+            isLoadingAction: false,
             data: {}
         };
         this.handleOnEditItem = this.handleOnEditItem.bind(this);
@@ -26,10 +27,12 @@ class Container extends React.Component {
     onLoadData = async () => {
         const { itemSelected } = this.props;
         if (itemSelected) {
+            this.setState({ isLoading: true });
             getById(itemSelected.id).then(data => {
                 this.setState({ data });
-                console.log("data", data);
-            }).catch(e => console.log(e));
+            }).catch(e => {
+                this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
+            }).finally(() => this.setState({ isLoading: false }));
         } else {
             this.props.addNotification({ typeToast: 'warn', text: "Item do not exist", title: "WARNING" });
             this.handleOnHide();
@@ -44,7 +47,7 @@ class Container extends React.Component {
         const form = e.target;
         const isValid = form.checkValidity();
         if (isValid === true && itemSelected) {
-            this.setState({ isLoadingMain: true });
+            this.setState({ isLoadingAction: true });
             const data = getJsonOfForm(form, {});
             data.status = Number(data.status);
             if (data.startedAt === "") {
@@ -59,7 +62,7 @@ class Container extends React.Component {
                 this.handleOnHide();
             }).catch(error => {
                 this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
-            }).finally(() => this.setState({ isLoadingMain: false }));
+            }).finally(() => this.setState({ isLoadingAction: false }));
         }
         form.classList.add('was-validated');
     }

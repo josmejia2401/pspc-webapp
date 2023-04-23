@@ -1,10 +1,15 @@
 import React from "react";
 import "./style.css";
+import CustomButtom from "../../../components/button";
 
 const Presenter = props => (
     <div className="modal fade show" tabIndex="-1" role="dialog" id="modalChoice" aria-labelledby="modalChoice" aria-modal="true" style={{ "display": "block" }}>
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div className="modal-content rounded-3 shadow">
+                <div className="modal-header">
+                    <h5 className="modal-title">Create item</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={props.handleOnHide}></button>
+                </div>
                 <div className="modal-body p-4 text-center">
                     <form className="login-form needs-validation" onSubmit={props.handleOnCreate} noValidate>
                         <div className="mb-3">
@@ -32,8 +37,16 @@ const Presenter = props => (
                             <label htmlFor="completedAt" className="form-label">Completed date</label>
                             <input type="date" className="form-control" id="completedAt" name="completedAt" />
                         </div>
+                        <CustomButtom
+                            title={"Create record"}
+                            isLoadingMain={props.state.isLoadingAction}
+                            type="submit"
+                            className="btn btn-primary"
+                            data-bs-dismiss="modal"
+                            onClick={props.handleOnDelete}
+                            disabled={props.state.isLoading}>
+                        </CustomButtom>
 
-                        <button type="submit" className="btn btn-primary">Create a record</button>
                     </form>
                 </div>
                 <div className="modal-footer flex-nowrap p-0">
