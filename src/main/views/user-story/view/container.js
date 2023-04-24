@@ -22,6 +22,7 @@ class Container extends React.Component {
         this.handleOnSelectedItem = this.handleOnSelectedItem.bind(this);
         this.handleOnEditItem = this.handleOnEditItem.bind(this);
         this.handleOnDeleteItem = this.handleOnDeleteItem.bind(this);
+        this.onClearItemSelected = this.onClearItemSelected.bind(this);
     }
 
     componentDidMount() {
@@ -32,28 +33,47 @@ class Container extends React.Component {
         this.setState({ isLoading: true });
         getAll().then(data => {
             this.setState({ data });
+            this.onClearItemSelected();
         }).catch(e => {
             this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
         }).finally(() => this.setState({ isLoading: false }));
     }
 
-    handleOnCreateItem = async () => {
+    handleOnCreateItem = async (e, isSuccessful) => {
         this.setState({ viewCreateItem: !this.state.viewCreateItem });
+        if (isSuccessful && isSuccessful === true) {
+            this.onClearItemSelected();
+            this.onLoadData();
+        }
     }
 
-    handleOnEditItem = async () => {
+    handleOnEditItem = async (e, isSuccessful) => {
         this.setState({ viewEditItem: !this.state.viewEditItem });
+        if (isSuccessful && isSuccessful === true) {
+            this.onClearItemSelected();
+            this.onLoadData();
+        }
     }
 
-    handleOnDeleteItem = async () => {
+    handleOnDeleteItem = async (e, isSuccessful) => {
         this.setState({ viewDeleteItem: !this.state.viewDeleteItem });
+        if (isSuccessful && isSuccessful === true) {
+            this.onClearItemSelected();
+            this.onLoadData();
+        }
     }
 
-    async handleOnSelectedItem(e, item) {
+    handleOnSelectedItem(e, item) {
         if (this.state.itemSelected && this.state.itemSelected.id === item.id) {
             this.setState({ itemSelected: undefined });
         } else {
             this.setState({ itemSelected: item });
+        }
+    }
+
+    onClearItemSelected() {
+        if (this.state.itemSelected) {
+            this.setState({ itemSelected: undefined });
         }
     }
 

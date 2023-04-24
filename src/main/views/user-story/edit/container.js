@@ -59,7 +59,7 @@ class Container extends React.Component {
             updateById(itemSelected.id, data).then(_result => {
                 form.reset();
                 this.props.addNotification({ typeToast: 'info', text: "Item updated", title: "SUCCESS" });
-                this.handleOnHide();
+                this.handleOnHide(null, true);
             }).catch(error => {
                 this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
             }).finally(() => this.setState({ isLoadingAction: false }));
@@ -67,10 +67,10 @@ class Container extends React.Component {
         form.classList.add('was-validated');
     }
 
-    async handleOnHide() {
+    async handleOnHide(e, isSuccessful = false) {
         const { handleOnEditItem } = this.props;
         if (handleOnEditItem) {
-            await handleOnEditItem();
+            await handleOnEditItem(e, isSuccessful);
         }
     }
 

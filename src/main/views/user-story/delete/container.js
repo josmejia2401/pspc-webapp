@@ -34,7 +34,7 @@ class Container extends React.Component {
             }).finally(() => this.setState({ isLoading: false }));
         } else {
             this.props.addNotification({ typeToast: 'warn', text: "Item do not exist", title: "WARNING" });
-            this.handleOnHide();
+            this.handleOnHide(null, false);
         }
     }
 
@@ -46,17 +46,17 @@ class Container extends React.Component {
             this.setState({ isLoadingAction: true });
             deleteById(itemSelected.id).then(_result => {
                 this.props.addNotification({ typeToast: 'info', text: "Item deleted", title: "SUCCESS" });
-                this.handleOnHide();
+                this.handleOnHide(null, true);
             }).catch(error => {
                 this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
             }).finally(() => this.setState({ isLoadingAction: false }));
         }
     }
 
-    async handleOnHide() {
+    async handleOnHide(e, isSuccessful = false) {
         const { handleOnDeleteItem } = this.props;
         if (handleOnDeleteItem) {
-            await handleOnDeleteItem();
+            await handleOnDeleteItem(e, isSuccessful);
         }
     }
 

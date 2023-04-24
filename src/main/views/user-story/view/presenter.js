@@ -18,7 +18,7 @@ const Presenter = props => (
         <main className="container icon-examples" id="content">
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb my-4 p-0">
-                    <li className="breadcrumb-item"><a href="/projects">User Story</a></li>
+                    <li className="breadcrumb-item"><a href="/user-story">User Story</a></li>
                     <li className="breadcrumb-item active" aria-current="page">view</li>
                 </ol>
             </nav>
