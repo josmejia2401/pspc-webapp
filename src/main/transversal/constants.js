@@ -1,6 +1,6 @@
-const SECURITY_API_BASE = "https://z700n9652g.execute-api.us-east-1.amazonaws.com";
-const USER_API_BASE = "https://sz8o589y56.execute-api.us-east-1.amazonaws.com";
-const PROJECT_API_BASE = "https://rmm4spoed7.execute-api.us-east-1.amazonaws.com";
+const SECURITY_API_BASE = "https://b75vb6zrw5.execute-api.us-east-1.amazonaws.com";
+const USER_API_BASE = "https://m7ql0m7fbd.execute-api.us-east-1.amazonaws.com";
+const PROJECT_API_BASE = "https://p099bzxu1j.execute-api.us-east-1.amazonaws.com";
 
 export default Object.freeze({
     API: {

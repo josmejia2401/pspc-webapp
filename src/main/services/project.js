@@ -2,10 +2,11 @@ import axios from 'axios';
 import { buildAndThrowNewError, buildHeaders } from '../transversal/auth';
 import Constants from "../transversal/constants";
 
-export const getAll = async () => {
+export const getAll = async (query) => {
     try {
+        const urlParameters = Object.entries(query).filter(p => p[1] !== undefined && p[1] !== null && p[1] !== "").map(e => e.join('=')).join('&');
         const authHeaders = buildHeaders();
-        const res = await axios.get(`${Constants.API.projects.getAll}`, {
+        const res = await axios.get(`${Constants.API.projects.getAll}?${urlParameters}`, {
             headers: {
                 ...authHeaders
             },

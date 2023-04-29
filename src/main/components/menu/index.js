@@ -53,7 +53,7 @@ class Container extends React.Component {
 
 
     render() {
-        return (<header className="navbar navbar-expand-lg navbar-dark bd-navbar sticky-top">
+        return (<header className="navbar navbar-expand-lg navbar-dark bd-navbar sticky-top" style={{ position: "absolute" }}>
             <nav className="container-xxl bd-gutter flex-wrap flex-lg-nowrap" aria-label="Main navigation">
                 <div className="d-lg-none" style={{ "width": "2.25rem" }}></div>
                 <a className="navbar-brand p-0 me-0 me-lg-2" href="https://getbootstrap.com/" aria-label="Bootstrap">

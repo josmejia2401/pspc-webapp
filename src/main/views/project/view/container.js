@@ -12,6 +12,12 @@ class Container extends React.Component {
         this.state = {
             isLoading: false,
             data: [],
+            dataFiltered: [],
+            queryData: {
+                lastEvaluatedKey: undefined,
+                segment: 0,
+                currentRowsNumber: 0,
+            },
             viewCreateItem: false,
             viewEditItem: false,
             viewDeleteItem: false,
@@ -23,6 +29,8 @@ class Container extends React.Component {
         this.handleOnEditItem = this.handleOnEditItem.bind(this);
         this.handleOnDeleteItem = this.handleOnDeleteItem.bind(this);
         this.onClearItemSelected = this.onClearItemSelected.bind(this);
+        this.handleOnChangeFilter = this.handleOnChangeFilter.bind(this);
+        this.onPaginationLoadData = this.onPaginationLoadData.bind(this);
     }
 
     componentDidMount() {
@@ -31,8 +39,47 @@ class Container extends React.Component {
 
     onLoadData = async () => {
         this.setState({ isLoading: true });
-        getAll().then(data => {
-            this.setState({ data });
+        getAll({
+            lastEvaluatedKey: undefined,
+            segment: undefined,
+            limit: 10
+        }).then(data => {
+            this.setState({
+                data: data.results,
+                dataFiltered: this.state.data,
+                queryData: {
+                    lastEvaluatedKey: data.lastEvaluatedKey,
+                    segment: data.segment,
+                    currentRowsNumber: data.currentRowsNumber,
+                }
+            });
+            this.onClearItemSelected();
+        }).catch(e => {
+            this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
+        }).finally(() => this.setState({ isLoading: false }));
+    }
+
+    onPaginationLoadData = async () => {
+        const { queryData } = this.state;
+        if (!queryData.lastEvaluatedKey) {
+            return;
+        }
+        this.setState({ isLoading: true });
+        getAll({
+            lastEvaluatedKey: queryData.lastEvaluatedKey,
+            segment: queryData.segment,
+            limit: 10
+        }).then(result => {
+            this.state.data.push(...result.results);
+            this.setState({
+                data: this.state.data,
+                dataFiltered: this.state.data,
+                queryData: {
+                    lastEvaluatedKey: result.lastEvaluatedKey,
+                    segment: result.segment,
+                    currentRowsNumber: result.currentRowsNumber,
+                }
+            });
             this.onClearItemSelected();
         }).catch(e => {
             this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
@@ -77,6 +124,17 @@ class Container extends React.Component {
         }
     }
 
+    async handleOnChangeFilter(e) {
+        if (e && e.target.value.length > 3) {
+            const { data } = this.state;
+            const dataFiltered = data.filter(p => p.description.includes(e.target.value) || p.name.includes(e.target.value));
+            this.setState({ dataFiltered });
+        } else if (e.target.value === "") {
+            const { data } = this.state;
+            this.setState({ dataFiltered: data });
+        }
+    }
+
     render() {
         return <Presenter
             state={this.state}
@@ -86,6 +144,8 @@ class Container extends React.Component {
             handleOnEditItem={this.handleOnEditItem}
             handleOnDeleteItem={this.handleOnDeleteItem}
             onLoadData={this.onLoadData}
+            handleOnChangeFilter={this.handleOnChangeFilter}
+            onPaginationLoadData={this.onPaginationLoadData}
         />;
     }
 }

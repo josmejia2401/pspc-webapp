@@ -3,6 +3,13 @@
 }
 
 #content {
+    /*
     align-items: center;
     position: relative;
+    */
+}
+
+.table-wrapper {
+    /*max-height: 80vh;*/
+    overflow: auto;
 }
