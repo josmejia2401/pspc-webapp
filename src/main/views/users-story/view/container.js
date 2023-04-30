@@ -36,16 +36,20 @@ class Container extends React.Component {
 
     componentDidMount() {
         this.onLoadData();
-        const projectId = new URLSearchParams(this.props.location.search).get("projectId");
-        this.setState({ projectId });
+       
     }
 
     onLoadData = async () => {
-        this.setState({ isLoading: true, data: [], dataFiltered: [] });
+
+        const projectId = new URLSearchParams(this.props.location.search).get("projectId");
+        this.setState({ projectId });
+
+        this.setState({ isLoading: true, data: [], dataFiltered: [], projectId });
         getAll({
             lastEvaluatedKey: undefined,
             segment: undefined,
-            limit: 10
+            limit: 10,
+            projectId,
         }).then(result => {
             result.results.map(p => {
                 p.createdAt = new String(p.createdAt).split(".")[0];
@@ -69,7 +73,7 @@ class Container extends React.Component {
     }
 
     onPaginationLoadData = async () => {
-        const { queryData } = this.state;
+        const { queryData, projectId } = this.state;
         if (!queryData.lastEvaluatedKey) {
             return;
         }
@@ -77,7 +81,8 @@ class Container extends React.Component {
         getAll({
             lastEvaluatedKey: queryData.lastEvaluatedKey,
             segment: queryData.segment,
-            limit: 10
+            limit: 10,
+            projectId
         }).then(result => {
             this.state.data.push(...result.results);
             this.state.data.map(p => {
