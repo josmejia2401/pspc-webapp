@@ -54,8 +54,8 @@ class Container extends React.Component {
 
 
     render() {
-        return (<footer className="bd-footer py-4 py-md-5 mt-5 bg-body-tertiary">
-            <div className="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
+        return (<footer className="bd-footer mt-5 bg-body-tertiary">
+            <div className="container px-md-3 text-body-secondary">
                 <div className="row">
                     <div className="col-lg-3 mb-3">
                         <a className="d-inline-flex align-items-center mb-2 text-body-secondary text-decoration-none"

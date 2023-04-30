@@ -38,19 +38,25 @@ class Container extends React.Component {
     }
 
     onLoadData = async () => {
-        this.setState({ isLoading: true });
+        this.setState({ isLoading: true, data: [], dataFiltered: [] });
         getAll({
             lastEvaluatedKey: undefined,
             segment: undefined,
             limit: 10
-        }).then(data => {
+        }).then(result => {
+            result.results.map(p => {
+                p.createdAt = new String(p.createdAt).split(".")[0];
+                p.createdAt = new Date(p.createdAt);
+                return p;
+            });
+            result.results.sort((a, b) => a.createdAt.getTime() > b.createdAt.getTime());
             this.setState({
-                data: data.results,
-                dataFiltered: this.state.data,
+                data: result.results,
+                dataFiltered: result.results,
                 queryData: {
-                    lastEvaluatedKey: data.lastEvaluatedKey,
-                    segment: data.segment,
-                    currentRowsNumber: data.currentRowsNumber,
+                    lastEvaluatedKey: result.lastEvaluatedKey,
+                    segment: result.segment,
+                    currentRowsNumber: result.currentRowsNumber,
                 }
             });
             this.onClearItemSelected();
@@ -71,6 +77,12 @@ class Container extends React.Component {
             limit: 10
         }).then(result => {
             this.state.data.push(...result.results);
+            this.state.data.map(p => {
+                p.createdAt = new String(p.createdAt).split(".")[0];
+                p.createdAt = new Date(p.createdAt);
+                return p;
+            });
+            //this.state.data.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
             this.setState({
                 data: this.state.data,
                 dataFiltered: this.state.data,
@@ -110,7 +122,7 @@ class Container extends React.Component {
         }
     }
 
-    handleOnSelectedItem(e, item) {
+    async handleOnSelectedItem(e, item) {
         if (this.state.itemSelected && this.state.itemSelected.id === item.id) {
             this.setState({ itemSelected: undefined });
         } else {
@@ -118,14 +130,14 @@ class Container extends React.Component {
         }
     }
 
-    onClearItemSelected() {
+    async onClearItemSelected() {
         if (this.state.itemSelected) {
             this.setState({ itemSelected: undefined });
         }
     }
 
     async handleOnChangeFilter(e) {
-        if (e && e.target.value.length > 3) {
+        if (e && e.target.value.length > 2) {
             const { data } = this.state;
             const dataFiltered = data.filter(p => p.description.includes(e.target.value) || p.name.includes(e.target.value));
             this.setState({ dataFiltered });

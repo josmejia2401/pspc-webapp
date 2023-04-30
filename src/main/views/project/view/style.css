@@ -13,3 +13,8 @@
     /*max-height: 80vh;*/
     overflow: auto;
 }
+
+.my-md-6 {
+    margin-top: 5rem!important;
+    margin-bottom: 3rem!important;
+}

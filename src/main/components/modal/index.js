@@ -12,9 +12,9 @@ class Container extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("prevProps", prevProps);
+        /*console.log("prevProps", prevProps);
         console.log("prevState", prevState);
-        console.log("snapshot", snapshot);
+        console.log("snapshot", snapshot);*/
         const { show } = prevProps;
         if (show !== prevState.show) {
             this.setState({ show: show });

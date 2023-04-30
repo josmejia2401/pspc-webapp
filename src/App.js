@@ -3,10 +3,10 @@ import * as React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthRouteComponent, AuthProvider, RouteComponent } from "./main/transversal/context";
 import './App.css';
-import AuthSignIn from './main/views/auth/sing-in';
-import AuthSignUp from './main/views/auth/sing-up';
 import ProjectView from './main/views/project/view';
 import Home from './main/views/home';
+import AuthSignIn from './main/views/auth/sing-in';
+import AuthSignUp from './main/views/auth/sing-up';
 //const Home = React.lazy(() => import("./main/views/home"));
 
 function App() {

@@ -11,12 +11,12 @@ import CustomButtom from "../../../components/button";
 
 const Presenter = props => (
     <>
-        <Menu {...props}></Menu>
-        <Modal></Modal>
+        <Menu {...props.parentProps}></Menu>
+        <Modal  {...props.parentProps}></Modal>
         {props.state.viewCreateItem === true && (<Create {...props.parentProps} handleOnCreateItem={props.handleOnCreateItem}></Create>)}
         {props.state.viewEditItem === true && (<Edit {...props.parentProps} itemSelected={props.state.itemSelected} handleOnEditItem={props.handleOnEditItem}></Edit>)}
         {props.state.viewDeleteItem === true && (<Delete {...props.parentProps} itemSelected={props.state.itemSelected} handleOnDeleteItem={props.handleOnDeleteItem}></Delete>)}
-        <div className="container-xxl bd-gutter mt-3 my-md-4" id="content">
+        <div className="container-xxl bd-gutter mt-6 my-md-6" id="content">
             <main className="order-1">
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb my-4 p-0">
@@ -101,17 +101,19 @@ const Presenter = props => (
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th scope="col" colSpan="6" className="text-center">
-                                                <CustomButtom
-                                                    title={"Load more"}
-                                                    isLoadingMain={props.state.isLoading}
-                                                    type="button"
-                                                    className="btn btn-primary"
-                                                    data-bs-dismiss="modal"
-                                                    onClick={props.onPaginationLoadData}
-                                                    disabled={props.state.isLoading}>
-                                                </CustomButtom>
-                                            </th>
+                                            {
+                                                props.state.isLoading === false && <th scope="col" colSpan="6" className="text-center">
+                                                    <CustomButtom
+                                                        title={"Load more"}
+                                                        isLoadingMain={props.state.isLoading}
+                                                        type="button"
+                                                        className="btn btn-primary"
+                                                        data-bs-dismiss="modal"
+                                                        onClick={props.onPaginationLoadData}
+                                                        disabled={props.state.isLoading}>
+                                                    </CustomButtom>
+                                                </th>
+                                            }
                                         </tr>
                                     </tfoot>
                                 </table>

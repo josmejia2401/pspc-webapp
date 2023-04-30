@@ -1,6 +1,7 @@
 body {
-    /*display: unset;
-    align-items: center;
+    display: unset !important;
+    align-items: unset !important;
+    /*
     background-color: #f1f2f6 !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;*/

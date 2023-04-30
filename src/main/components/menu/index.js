@@ -1,11 +1,13 @@
 import React from 'react';
 import './style.css';
+import CustomButtom from "../button";
 import { signOut } from "../../services/auth";
 
 class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: false,
         }
         this.handleOnOpenMenuMobileItem = this.handleOnOpenMenuMobileItem.bind(this);
         this.handleOnOpenMenuMobile = this.handleOnOpenMenuMobile.bind(this);
@@ -44,11 +46,13 @@ class Container extends React.Component {
 
 
     handleClose(e) {
+        this.setState({ isLoading: true });
         signOut().then(() => {
             this.props.navigate(0);
+            window.location.href("/");
         }).catch(error => {
-            this.props.addNotification({ typeToast: 'error', text: error.message, title: "ERROR" });
-        }).finally(() => this.setState({ isLoadingMain: false }));
+            window.location.href("/");
+        }).finally(() => this.setState({ isLoading: false }));
     }
 
 
@@ -131,14 +135,27 @@ class Container extends React.Component {
                             </li>
 
                             <li className="nav-item dropdown">
-                                <button className="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
-                                    <span className="material-icons" onClick={(e) => this.handleOnOpenConfigUser(e)}>account_circle</span>
+                                <button className="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+                                    type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                                    data-bs-display="static" onClick={(e) => this.handleOnOpenConfigUser(e)}>
+                                    <span className="material-icons">account_circle</span>
                                 </button>
                                 <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="idConfigUser" id="idConfigUser" style={{ "--bs-dropdown-min-width": "8rem" }} data-bs-popper="static" >
                                     <li>
+                                        <CustomButtom
+                                            title={<><span className="material-icons me-2 opacity-50">logout</span> Cerrar sesión</>}
+                                            isLoadingMain={this.state.isLoading}
+                                            type="button"
+                                            className="dropdown-item"
+                                            data-bs-dismiss="modal"
+                                            onClick={this.handleClose}
+                                            disabled={this.state.isLoading}>
+                                        </CustomButtom>
+                                        {/*
                                         <a className="dropdown-item" href="#" onClick={this.handleClose}>
                                             <span className="material-icons me-2 opacity-50">logout</span> Cerrar sesión
                                         </a>
+                                        */}
                                     </li>
                                 </ul>
                             </li>
