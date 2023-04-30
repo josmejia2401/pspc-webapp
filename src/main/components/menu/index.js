@@ -94,13 +94,13 @@ class Container extends React.Component {
                                 </a>
                             </li>
                             <li className="nav-item col-6 col-lg-auto">
-                                <a className="nav-link py-2 px-0 px-lg-2 active" href='/user-story/view' rel="noopener">
+                                <a className="nav-link py-2 px-0 px-lg-2 active" href='/users-story/view' rel="noopener">
                                     <span className="material-icons navbar-nav-svg">web_stories</span>
                                     <small className="ms-2">User history</small>
                                 </a>
                             </li>
                             <li className="nav-item col-6 col-lg-auto">
-                                <a className="nav-link py-2 px-0 px-lg-2 active" rel="noopener">
+                                <a className="nav-link py-2 px-0 px-lg-2 active" href='/tasks/view' rel="noopener">
                                     <span className="material-icons navbar-nav-svg">task</span>
                                     <small className="d-lg-none ms-2">Tasks</small>
                                 </a>

@@ -13,7 +13,7 @@ const Presenter = props => (
     <>
         <Menu {...props.parentProps}></Menu>
         <Modal  {...props.parentProps}></Modal>
-        {props.state.viewCreateItem === true && (<Create {...props.parentProps} handleOnCreateItem={props.handleOnCreateItem}></Create>)}
+        {props.state.viewCreateItem === true && (<Create {...props.parentProps} handleOnCreateItem={props.handleOnCreateItem} projectId={props.state.projectId}></Create>)}
         {props.state.viewEditItem === true && (<Edit {...props.parentProps} itemSelected={props.state.itemSelected} handleOnEditItem={props.handleOnEditItem}></Edit>)}
         {props.state.viewDeleteItem === true && (<Delete {...props.parentProps} itemSelected={props.state.itemSelected} handleOnDeleteItem={props.handleOnDeleteItem}></Delete>)}
         <div className="container-xxl bd-gutter mt-6 my-md-6" id="content">
@@ -48,9 +48,9 @@ const Presenter = props => (
                                                         <span className="material-icons material-symbols-outlined" onClick={props.handleOnDeleteItem} style={{
                                                             marginLeft: 5
                                                         }}>delete</span>
-                                                        <span className="material-icons material-symbols-outlined" onClick={() => props.parentProps.navigate(`/users-story/view?projectId=${props.state.itemSelected.id}`)} style={{
+                                                        <span className="material-icons material-symbols-outlined" onClick={() => props.parentProps.navigate(`/tasks/view?projectId=${props.state.projectId}&usersStoryId=${props.state.itemSelected.id}`)} style={{
                                                             marginLeft: 5
-                                                        }}>splitscreen</span>
+                                                        }}>task</span>
                                                     </>
                                                 }
                                             </th>
