@@ -13,7 +13,8 @@ class Container extends React.Component {
         this.state = {
             isLoadingAction: false,
             isLoading: false,
-            itemSelected: undefined
+            itemSelected: undefined,
+            projectId: undefined
         };
         this.handleOnCreate = this.handleOnCreate.bind(this);
         this.handleOnHide = this.handleOnHide.bind(this);

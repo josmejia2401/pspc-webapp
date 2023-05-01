@@ -44,7 +44,10 @@ class Container extends React.Component {
     onLoadData = async () => {
         const projectId = new URLSearchParams(this.props.location.search).get("projectId");
         this.setState({
-            isLoading: true, data: [], dataFiltered: [], queryData: {
+            isLoading: true,
+            data: [],
+            dataFiltered: [],
+            queryData: {
                 lastEvaluatedKey: undefined,
                 segment: 0,
                 currentRowsNumber: 0,
@@ -62,6 +65,7 @@ class Container extends React.Component {
     }
 
     onProcessResult = async (result) => {
+        const projectId = new URLSearchParams(this.props.location.search).get("projectId");
         result.results.map(p => {
             p.createdAt = new String(p.createdAt).split(".")[0];
             p.createdAt = new Date(p.createdAt);
@@ -75,6 +79,7 @@ class Container extends React.Component {
                 lastEvaluatedKey: result.lastEvaluatedKey,
                 segment: result.segment,
                 currentRowsNumber: result.currentRowsNumber,
+                projectId: projectId,
             }
         });
         this.onClearItemSelected();
