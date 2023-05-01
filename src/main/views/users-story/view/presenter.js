@@ -20,7 +20,7 @@ const Presenter = props => (
             <main className="order-1">
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb my-4 p-0">
-                        <li className="breadcrumb-item"><a href="/projects">Projects</a></li>
+                        <li className="breadcrumb-item"><a href="/users-story/view">Users story</a></li>
                         <li className="breadcrumb-item active" aria-current="page">view</li>
                     </ol>
                 </nav>
@@ -28,11 +28,11 @@ const Presenter = props => (
                 <hr className="my-4" />
                 <div className="bd-content ps-lg-2 col-lg-12 mb-4">
                     <div className="bd-intro pt-2 ps-lg-2">
-                        <h2>Proyectos</h2>
+                        <h2>Users story</h2>
                         <div className="p-3 p-md-4 border rounded-3 icon-demo-examples justify-content-center">
                             <div className="table-responsive table-wrapper">
                                 <table className="table table-hover">
-                                    <caption>List of projects</caption>
+                                    <caption>List of users story</caption>
                                     <thead>
                                         <tr>
                                             <th colSpan="3">

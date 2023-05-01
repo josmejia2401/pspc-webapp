@@ -43,21 +43,29 @@ class Container extends React.Component {
         e.preventDefault();
         e.stopPropagation();
         const { itemSelected } = this.props;
-        const { data } = this.state;
         //const { setUserInfo, getUserInfo } = this.context;
         const form = e.target;
         const isValid = form.checkValidity();
         if (isValid === true && itemSelected) {
             this.setState({ isLoadingAction: true });
             const payload = getJsonOfForm(form, {});
-            payload.status = Number(payload.status);
+            payload.statusId = Number(payload.statusId);
+            payload.phaseId = Number(payload.phaseId);
+            payload.priorityId = Number(payload.priorityId);
+            payload.actualTime = Number(payload.actualTime);
+            payload.estimatedTime = Number(payload.estimatedTime);
             if (payload.startedAt === "") {
                 delete payload.startedAt;
             }
             if (payload.completedAt === "") {
                 delete payload.completedAt;
             }
-            //payload.projectId = data.projectId;
+            if (payload.startedAt === "") {
+                delete payload.startedAt;
+            }
+            if (payload.completedAt === "") {
+                delete payload.completedAt;
+            }
             updateById(itemSelected.id, payload).then(_result => {
                 form.reset();
                 this.props.addNotification({ typeToast: 'info', text: "Item updated", title: "SUCCESS" });

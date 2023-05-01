@@ -31,6 +31,8 @@ class Container extends React.Component {
         this.onClearItemSelected = this.onClearItemSelected.bind(this);
         this.handleOnChangeFilter = this.handleOnChangeFilter.bind(this);
         this.onPaginationLoadData = this.onPaginationLoadData.bind(this);
+        this.onProcessResult = this.onProcessResult.bind(this);
+        this.onProcessResultPagination = this.onProcessResultPagination.bind(this);
     }
 
     componentDidMount() {
@@ -43,27 +45,30 @@ class Container extends React.Component {
             lastEvaluatedKey: undefined,
             segment: undefined,
             limit: 10
-        }).then(result => {
-            result.results.map(p => {
-                p.createdAt = new String(p.createdAt).split(".")[0];
-                p.createdAt = new Date(p.createdAt);
-                return p;
-            });
-            result.results.sort((a, b) => a.createdAt.getTime() > b.createdAt.getTime());
-            this.setState({
-                data: result.results,
-                dataFiltered: result.results,
-                queryData: {
-                    lastEvaluatedKey: result.lastEvaluatedKey,
-                    segment: result.segment,
-                    currentRowsNumber: result.currentRowsNumber,
-                }
-            });
-            this.onClearItemSelected();
-        }).catch(e => {
-            this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
-        }).finally(() => this.setState({ isLoading: false }));
+        }).then(result => this.onProcessResult(result))
+            .catch(e => this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" }))
+            .finally(() => this.setState({ isLoading: false }));
     }
+
+    onProcessResult = async (result) => {
+        result.results.map(p => {
+            p.createdAt = String(p.createdAt).split(".")[0];
+            p.createdAt = new Date(p.createdAt);
+            return p;
+        });
+        result.results.sort((a, b) => a.createdAt.getTime() > b.createdAt.getTime());
+        this.setState({
+            data: result.results,
+            dataFiltered: result.results,
+            queryData: {
+                lastEvaluatedKey: result.lastEvaluatedKey,
+                segment: result.segment,
+                currentRowsNumber: result.currentRowsNumber,
+            }
+        });
+        this.onClearItemSelected();
+    }
+
 
     onPaginationLoadData = async () => {
         const { queryData } = this.state;
@@ -75,27 +80,29 @@ class Container extends React.Component {
             lastEvaluatedKey: queryData.lastEvaluatedKey,
             segment: queryData.segment,
             limit: 10
-        }).then(result => {
-            this.state.data.push(...result.results);
-            this.state.data.map(p => {
-                p.createdAt = new String(p.createdAt).split(".")[0];
-                p.createdAt = new Date(p.createdAt);
-                return p;
-            });
-            //this.state.data.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
-            this.setState({
-                data: this.state.data,
-                dataFiltered: this.state.data,
-                queryData: {
-                    lastEvaluatedKey: result.lastEvaluatedKey,
-                    segment: result.segment,
-                    currentRowsNumber: result.currentRowsNumber,
-                }
-            });
-            this.onClearItemSelected();
-        }).catch(e => {
-            this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
-        }).finally(() => this.setState({ isLoading: false }));
+        }).then(result => this.onProcessResultPagination(result))
+            .catch(e => this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" }))
+            .finally(() => this.setState({ isLoading: false }));
+    }
+
+    onProcessResultPagination = async (result) => {
+        this.state.data.push(...result.results);
+        this.state.data.map(p => {
+            p.createdAt = String(p.createdAt).split(".")[0];
+            p.createdAt = new Date(p.createdAt);
+            return p;
+        });
+        //this.state.data.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+        this.setState({
+            data: this.state.data,
+            dataFiltered: this.state.data,
+            queryData: {
+                lastEvaluatedKey: result.lastEvaluatedKey,
+                segment: result.segment,
+                currentRowsNumber: result.currentRowsNumber,
+            }
+        });
+        this.onClearItemSelected();
     }
 
     handleOnCreateItem = async (e, isSuccessful) => {

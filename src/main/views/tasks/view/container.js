@@ -13,12 +13,15 @@ class Container extends React.Component {
             isLoading: false,
             data: [],
             dataFiltered: [],
-            projectId: undefined,
-            usersStoryId: undefined,
+            totalEstimated: 0,
+            totalActual: 0,
             queryData: {
                 lastEvaluatedKey: undefined,
                 segment: 0,
                 currentRowsNumber: 0,
+                limit: 10,
+                projectId: undefined,
+                usersStoryId: undefined,
             },
             viewCreateItem: false,
             viewEditItem: false,
@@ -33,6 +36,8 @@ class Container extends React.Component {
         this.onClearItemSelected = this.onClearItemSelected.bind(this);
         this.handleOnChangeFilter = this.handleOnChangeFilter.bind(this);
         this.onPaginationLoadData = this.onPaginationLoadData.bind(this);
+        this.onProcessResult = this.onProcessResult.bind(this);
+        this.onProcessResultPagination = this.onProcessResultPagination.bind(this);
     }
 
     componentDidMount() {
@@ -42,37 +47,57 @@ class Container extends React.Component {
     onLoadData = async () => {
         const projectId = new URLSearchParams(this.props.location.search).get("projectId");
         const usersStoryId = new URLSearchParams(this.props.location.search).get("usersStoryId");
-        this.setState({ isLoading: true, data: [], dataFiltered: [], projectId, usersStoryId });
+        this.setState({
+            isLoading: true, data: [], dataFiltered: [], queryData: {
+                projectId,
+                usersStoryId,
+                lastEvaluatedKey: undefined,
+                segment: 0,
+                currentRowsNumber: 0,
+            }
+        });
         getAll({
             lastEvaluatedKey: undefined,
             segment: undefined,
             limit: 10,
             projectId: projectId,
             usersStoryId: usersStoryId,
-        }).then(result => {
-            result.results.map(p => {
-                p.createdAt = new String(p.createdAt).split(".")[0];
-                p.createdAt = new Date(p.createdAt);
-                return p;
-            });
-            result.results.sort((a, b) => a.createdAt.getTime() > b.createdAt.getTime());
-            this.setState({
-                data: result.results,
-                dataFiltered: result.results,
-                queryData: {
-                    lastEvaluatedKey: result.lastEvaluatedKey,
-                    segment: result.segment,
-                    currentRowsNumber: result.currentRowsNumber,
-                }
-            });
-            this.onClearItemSelected();
-        }).catch(e => {
-            this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
-        }).finally(() => this.setState({ isLoading: false }));
+        }).then(result => this.onProcessResult(result))
+            .catch(e => this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" }))
+            .finally(() => this.setState({ isLoading: false }));
+    }
+
+    onProcessResult = async (result) => {
+        const projectId = new URLSearchParams(this.props.location.search).get("projectId");
+        const usersStoryId = new URLSearchParams(this.props.location.search).get("usersStoryId");
+        let totalEstimated = 0;
+        let totalActual = 0;
+        result.results.map(p => {
+            p.createdAt = String(p.createdAt).split(".")[0];
+            p.createdAt = new Date(p.createdAt);
+            totalEstimated = totalEstimated + Number(p.estimatedTime);
+            totalActual = totalActual + Number(p.actualTime);
+            return p;
+        });
+        result.results.sort((a, b) => a.createdAt.getTime() > b.createdAt.getTime());
+        this.setState({
+            data: result.results,
+            dataFiltered: result.results,
+            totalEstimated: totalEstimated,
+            totalActual: totalActual,
+            queryData: {
+                lastEvaluatedKey: result.lastEvaluatedKey,
+                segment: result.segment,
+                currentRowsNumber: result.currentRowsNumber,
+                projectId: projectId,
+                usersStoryId: usersStoryId,
+            }
+        });
+        this.onClearItemSelected();
     }
 
     onPaginationLoadData = async () => {
-        const { queryData, projectId, usersStoryId } = this.state;
+        const { queryData } = this.state;
         if (!queryData.lastEvaluatedKey) {
             return;
         }
@@ -80,30 +105,42 @@ class Container extends React.Component {
         getAll({
             lastEvaluatedKey: queryData.lastEvaluatedKey,
             segment: queryData.segment,
-            limit: 10,
-            projectId: projectId,
-            usersStoryId: usersStoryId,
-        }).then(result => {
-            this.state.data.push(...result.results);
-            this.state.data.map(p => {
-                p.createdAt = new String(p.createdAt).split(".")[0];
-                p.createdAt = new Date(p.createdAt);
-                return p;
-            });
-            //this.state.data.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
-            this.setState({
-                data: this.state.data,
-                dataFiltered: this.state.data,
-                queryData: {
-                    lastEvaluatedKey: result.lastEvaluatedKey,
-                    segment: result.segment,
-                    currentRowsNumber: result.currentRowsNumber,
-                }
-            });
-            this.onClearItemSelected();
-        }).catch(e => {
-            this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
-        }).finally(() => this.setState({ isLoading: false }));
+            limit: queryData.limit,
+            projectId: queryData.projectId,
+            usersStoryId: queryData.usersStoryId,
+        }).then(result => this.onProcessResultPagination(result))
+            .catch(e => this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" }))
+            .finally(() => this.setState({ isLoading: false }));
+    }
+
+    onProcessResultPagination = async (result) => {
+        const projectId = new URLSearchParams(this.props.location.search).get("projectId");
+        const usersStoryId = new URLSearchParams(this.props.location.search).get("usersStoryId");
+        let totalEstimated = 0;
+        let totalActual = 0;
+        this.state.data.push(...result.results);
+        this.state.data.map(p => {
+            p.createdAt = new String(p.createdAt).split(".")[0];
+            p.createdAt = new Date(p.createdAt);
+            totalEstimated = totalEstimated + Number(p.estimatedTime);
+            totalActual = totalActual + Number(p.actualTime);
+            return p;
+        });
+        //this.state.data.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+        this.setState({
+            data: this.state.data,
+            dataFiltered: this.state.data,
+            totalEstimated: totalEstimated,
+            totalActual: totalActual,
+            queryData: {
+                lastEvaluatedKey: result.lastEvaluatedKey,
+                segment: result.segment,
+                currentRowsNumber: result.currentRowsNumber,
+                projectId: projectId,
+                usersStoryId: usersStoryId,
+            }
+        });
+        this.onClearItemSelected();
     }
 
     handleOnCreateItem = async (e, isSuccessful) => {

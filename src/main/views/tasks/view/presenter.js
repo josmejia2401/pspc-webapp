@@ -16,8 +16,8 @@ const Presenter = props => (
         {props.state.viewCreateItem === true && (<Create
             {...props.parentProps}
             handleOnCreateItem={props.handleOnCreateItem}
-            projectId={props.state.projectId}
-            usersStoryId={props.state.usersStoryId}>
+            projectId={props.state.queryData.projectId}
+            usersStoryId={props.state.queryData.usersStoryId}>
         </Create>)}
         {props.state.viewEditItem === true && (<Edit {...props.parentProps} itemSelected={props.state.itemSelected} handleOnEditItem={props.handleOnEditItem}></Edit>)}
         {props.state.viewDeleteItem === true && (<Delete {...props.parentProps} itemSelected={props.state.itemSelected} handleOnDeleteItem={props.handleOnDeleteItem}></Delete>)}
@@ -25,7 +25,7 @@ const Presenter = props => (
             <main className="order-1">
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb my-4 p-0">
-                        <li className="breadcrumb-item"><a href="/projects">Projects</a></li>
+                        <li className="breadcrumb-item"><a href="/tasks/view">Tasks</a></li>
                         <li className="breadcrumb-item active" aria-current="page">view</li>
                     </ol>
                 </nav>
@@ -33,11 +33,11 @@ const Presenter = props => (
                 <hr className="my-4" />
                 <div className="bd-content ps-lg-2 col-lg-12 mb-4">
                     <div className="bd-intro pt-2 ps-lg-2">
-                        <h2>Proyectos</h2>
+                        <h2>Tasks</h2>
                         <div className="p-3 p-md-4 border rounded-3 icon-demo-examples justify-content-center">
                             <div className="table-responsive table-wrapper">
                                 <table className="table table-hover">
-                                    <caption>List of projects</caption>
+                                    <caption>List of tasks</caption>
                                     <thead>
                                         <tr>
                                             <th colSpan="3">
@@ -69,13 +69,18 @@ const Presenter = props => (
                                             <th scope="col">Started</th>
                                             <th scope="col">Completed</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col">Priority</th>
+                                            <th scope="col">Phase</th>
+                                            <th scope="col">Estimated time</th>
+                                            <th scope="col">Actual Time</th>
+                                            <th scope="col">Delta</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
                                             props.state.isLoading === true ? (
                                                 <tr>
-                                                    <th scope="col" colSpan="6">
+                                                    <th scope="col" colSpan="11">
                                                         <div className="text-center">
                                                             <div className="spinner-border" role="status">
                                                                 <span className="visually-hidden">Loading...</span>
@@ -95,9 +100,18 @@ const Presenter = props => (
                                                             <td>{item.startedAt}</td>
                                                             <td>{item.completedAt}</td>
                                                             <td>
-                                                                {Constants.STATUS[item.status] === "ACTIVE" && <label className="badge text-bg-success">{Constants.STATUS[item.status]}</label>}
-                                                                {Constants.STATUS[item.status] !== "ACTIVE" && <label className="badge text-bg-danger">{Constants.STATUS[item.status]}</label>}
+                                                                {Constants.STATUS[item.statusId] === "ACTIVE" && <label className="badge text-bg-success">{Constants.STATUS[item.statusId]}</label>}
+                                                                {Constants.STATUS[item.statusId] !== "ACTIVE" && <label className="badge text-bg-danger">{Constants.STATUS[item.statusId]}</label>}
                                                             </td>
+                                                            <td>
+                                                                {<label className="badge text-bg-success">{Constants.PRIORITY[item.priorityId]}</label>}
+                                                            </td>
+                                                            <td>
+                                                                {<label className="badge text-bg-success">{Constants.PHASE[item.phaseId]}</label>}
+                                                            </td>
+                                                            <td>{item.estimatedTime}</td>
+                                                            <td>{item.actualTime}</td>
+                                                            <td>{item.estimatedTime - item.actualTime}</td>
                                                         </tr>
                                                     )
                                                 })
@@ -106,8 +120,20 @@ const Presenter = props => (
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <th scope="col" colSpan="8" className="text-rigth"></th>
+                                            <th scope="col" colSpan="1" className="ext-center">
+                                                {props.state.totalEstimated}
+                                            </th>
+                                            <th scope="col" colSpan="1" className="text-left">
+                                                {props.state.totalActual}
+                                            </th>
+                                            <th scope="col" colSpan="1" className="text-left">
+                                                {props.state.totalEstimated - props.state.totalActual}
+                                            </th>
+                                        </tr>
+                                        <tr>
                                             {
-                                                props.state.isLoading === false && props.state.queryData.lastEvaluatedKey && <th scope="col" colSpan="6" className="text-center">
+                                                props.state.isLoading === false && props.state.queryData.lastEvaluatedKey && <th scope="col" colSpan="11" className="text-center">
                                                     <CustomButtom
                                                         title={"Load more"}
                                                         isLoadingMain={props.state.isLoading}

@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import CustomButtom from "../../../components/button";
+import Constants from "../../../transversal/constants";
 
 const Presenter = props => (
     <div className="modal fade show" tabIndex="-1" role="dialog" id="modalChoice" aria-labelledby="modalChoice" aria-modal="true" style={{ "display": "block" }}>
@@ -20,6 +21,7 @@ const Presenter = props => (
                             </div>
                         ) : (
                             <form className="login-form needs-validation" onSubmit={props.handleOnEditItem} noValidate>
+
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Name</label>
                                     <input type="text" className="form-control" id="name" name="name" aria-describedby="nameHelp" defaultValue={props.state.data?.name} required />
@@ -30,22 +32,67 @@ const Presenter = props => (
                                     <input type="text" className="form-control" id="description" name="description" defaultValue={props.state.data?.description} required />
                                 </div>
 
-                                <select className="form-select" aria-label="Status" name="status" id="status" defaultValue={props.state.data?.status}>
-                                    <option disabled>Status</option>
-                                    <option value={1}>ACTIVE</option>
-                                    <option value={2}>INACTIVE</option>
-                                </select>
-
-                                <div className="mb-3">
-                                    <label htmlFor="startedAt" className="form-label">Start date</label>
-                                    <input type="date" className="form-control" id="startedAt" name="startedAt" defaultValue={props.state.data?.startedAt} />
+                                <div className="row mb-3">
+                                    <div className="col-6">
+                                        <label htmlFor="statusId" className="form-label">Status</label>
+                                        <select className="form-select" aria-label="statusId" name="statusId" id="statusId" defaultValue={props.state.data?.statusId} required>
+                                            {
+                                                Object.keys(Constants.STATUS).map((key, i) => {
+                                                    return (
+                                                        <option key={`statusId${key}`} value={key}>{Constants.STATUS[key]}</option>
+                                                    );
+                                                })
+                                            }
+                                        </select>
+                                    </div>
+                                    <div className="col-6">
+                                        <label htmlFor="priorityId" className="form-label">Priority</label>
+                                        <select className="form-select" aria-label="priorityId" name="priorityId" id="priorityId" defaultValue={props.state.data?.priorityId} required>
+                                            {
+                                                Object.keys(Constants.PRIORITY).map((key, i) => {
+                                                    return (
+                                                        <option key={`priorityId${key}`} value={key}>{Constants.PRIORITY[key]}</option>
+                                                    );
+                                                })
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div className="mb-3">
-                                    <label htmlFor="completedAt" className="form-label">Completed date</label>
-                                    <input type="date" className="form-control" id="completedAt" name="completedAt" defaultValue={props.state.data?.completedAt} />
+                                    <label htmlFor="phaseId" className="form-label">Phase</label>
+                                    <select className="form-select" aria-label="phaseId" name="phaseId" id="phaseId" defaultValue={props.state.data?.phaseId} required>
+                                        {
+                                            Object.keys(Constants.PHASE).map((key, i) => {
+                                                return (
+                                                    <option key={`phaseId${key}`} value={key}>{Constants.PHASE[key]}</option>
+                                                );
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                                <div className="row mb-3">
+                                    <div className="col-6">
+                                        <label htmlFor="estimatedTime" className="form-label">Estimated time</label>
+                                        <input type="number" className="form-control" id="estimatedTime" name="estimatedTime" defaultValue={props.state.data?.estimatedTime} required />
+                                    </div>
+                                    <div className="col-6">
+                                        <label htmlFor="actualTime" className="form-label">Actual time</label>
+                                        <input type="number" className="form-control" id="actualTime" name="actualTime" defaultValue={props.state.data?.actualTime} required />
+                                    </div>
                                 </div>
 
+                                <div className="row mb-3">
+                                    <div className="col-6">
+                                        <label htmlFor="startedAt" className="form-label">Start date</label>
+                                        <input type="date" className="form-control" id="startedAt" name="startedAt" defaultValue={props.state.data?.startedAt} />
+                                    </div>
+
+                                    <div className="col-6">
+                                        <label htmlFor="completedAt" className="form-label">Completed date</label>
+                                        <input type="date" className="form-control" id="completedAt" name="completedAt" defaultValue={props.state.data?.completedAt} />
+                                    </div>
+                                </div>
                                 <CustomButtom type="submit" className="btn btn-primary" title={"Update a record"} isLoadingMain={props.state.isLoadingAction}></CustomButtom>
                             </form>
                         )

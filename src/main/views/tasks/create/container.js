@@ -25,15 +25,16 @@ class Container extends React.Component {
     }
     
     onLoadData = async () => {
-        const { projectId } = this.props;
-        this.setState({ projectId });
+        const { projectId, usersStoryId } = this.props;
+        this.setState({ projectId, usersStoryId });
     }
 
     handleOnCreate = async (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const { projectId } = this.state;
-        if (!projectId) {
+        const { projectId, usersStoryId } = this.state;
+        if (!projectId || !usersStoryId) {
+            this.props.addNotification({ typeToast: 'error', text: "Project or Users story is not defined", title: "ERROR" });
             return;
         }
         //const { setUserInfo, getUserInfo } = this.context;
@@ -41,16 +42,21 @@ class Container extends React.Component {
         const isValid = form.checkValidity();
         if (isValid === true) {
             this.setState({ isLoadingAction: true });
-            const data = getJsonOfForm(form, {});
-            data.status = Number(data.status);
-            if (data.startedAt === "") {
-                delete data.startedAt;
+            const payload = getJsonOfForm(form, {});
+            payload.statusId = Number(payload.statusId);
+            payload.phaseId = Number(payload.phaseId);
+            payload.priorityId = Number(payload.priorityId);
+            payload.actualTime = Number(payload.actualTime);
+            payload.estimatedTime = Number(payload.estimatedTime);
+            if (payload.startedAt === "") {
+                delete payload.startedAt;
             }
-            if (data.completedAt === "") {
-                delete data.completedAt;
+            if (payload.completedAt === "") {
+                delete payload.completedAt;
             }
-            data.projectId = projectId;
-            create(data).then(_result => {
+            payload.projectId = projectId;
+            payload.usersStoryId = usersStoryId;
+            create(payload).then(_result => {
                 form.reset();
                 this.props.addNotification({ typeToast: 'info', text: "Item created", title: "SUCCESS" });
                 this.handleOnHide(null, true);

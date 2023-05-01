@@ -2,7 +2,7 @@ const SECURITY_API_BASE = "https://b75vb6zrw5.execute-api.us-east-1.amazonaws.co
 const USER_API_BASE = "https://m7ql0m7fbd.execute-api.us-east-1.amazonaws.com";
 const PROJECT_API_BASE = "https://p099bzxu1j.execute-api.us-east-1.amazonaws.com";
 const USERS_STORY_API_BASE = "https://j4m2v41nj5.execute-api.us-east-1.amazonaws.com";
-const TASKS_STORY_API_BASE = "https://a3y0tlncnj.execute-api.us-east-1.amazonaws.com";
+const TASKS_STORY_API_BASE = "https://adgpffevtg.execute-api.us-east-1.amazonaws.com";
 
 export default Object.freeze({
     API: {
@@ -39,5 +39,20 @@ export default Object.freeze({
     STATUS: {
         1: "ACTIVE",
         2: "INACTIVE"
+    },
+    PRIORITY: {
+        1: "MUY BAJA",
+        2: "BAJA",
+        3: "MEDIA",
+        4: "ALTA",
+        5: "MUY ALTA"
+    },
+    PHASE: {
+        1: "ANÁLISIS",
+        2: "DISEÑO",
+        3: "IMPLEMENTACION",
+        4: "PRUEBAS",
+        5: "DESPLIEGUE",
+        6: "MANTENIMIENTO"
     }
 });

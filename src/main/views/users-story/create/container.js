@@ -34,6 +34,7 @@ class Container extends React.Component {
         e.stopPropagation();
         const { projectId } = this.state;
         if (!projectId) {
+            this.props.addNotification({ typeToast: 'error', text: "Project is not defined", title: "ERROR" });
             return;
         }
         //const { setUserInfo, getUserInfo } = this.context;
