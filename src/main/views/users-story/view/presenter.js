@@ -13,7 +13,7 @@ const Presenter = props => (
     <>
         <Menu {...props.parentProps}></Menu>
         <Modal  {...props.parentProps}></Modal>
-        {props.state.viewCreateItem === true && (<Create {...props.parentProps} handleOnCreateItem={props.handleOnCreateItem} projectId={props.state.projectId}></Create>)}
+        {props.state.viewCreateItem === true && (<Create {...props.parentProps} handleOnCreateItem={props.handleOnCreateItem} projectId={props.state.queryData.projectId}></Create>)}
         {props.state.viewEditItem === true && (<Edit {...props.parentProps} itemSelected={props.state.itemSelected} handleOnEditItem={props.handleOnEditItem}></Edit>)}
         {props.state.viewDeleteItem === true && (<Delete {...props.parentProps} itemSelected={props.state.itemSelected} handleOnDeleteItem={props.handleOnDeleteItem}></Delete>)}
         <div className="container-xxl bd-gutter mt-6 my-md-6" id="content">
