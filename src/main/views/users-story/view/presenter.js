@@ -51,7 +51,7 @@ const Presenter = props => (
                                                         <span className="material-icons material-symbols-outlined" onClick={props.handleOnDeleteItem} style={{
                                                             marginLeft: 5
                                                         }}>delete</span>
-                                                        <span className="material-icons material-symbols-outlined" onClick={() => props.parentProps.navigate(`/tasks/view?projectId=${props.state.projectId}&usersStoryId=${props.state.itemSelected.id}`)} style={{
+                                                        <span className="material-icons material-symbols-outlined" onClick={() => props.parentProps.navigate(`/tasks/view?projectId=${props.state.itemSelected.projectId}&usersStoryId=${props.state.itemSelected.id}`)} style={{
                                                             marginLeft: 5
                                                         }}>task</span>
                                                     </>
