@@ -56,7 +56,7 @@ const Presenter = props => (
                                                     </>
                                                 }
                                             </th>
-                                            <th colSpan="3">
+                                            <th colSpan="8">
                                                 <input type="text" className="form-control" id="description" name="description" onChange={props.handleOnChangeFilter} />
                                             </th>
                                         </tr>
