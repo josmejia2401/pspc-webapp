@@ -71,6 +71,18 @@ const Presenter = props => (
                                         }
                                     </select>
                                 </div>
+
+                                <div className="row mb-3">
+                                    <div className="col-6">
+                                        <label htmlFor="programmingLanguages" className="form-label">Languages</label>
+                                        <input type="text" className="form-control" id="programmingLanguages" name="programmingLanguages" placeholder="Separate by comma" defaultValue={props.state.data?.programmingLanguages}  required />
+                                    </div>
+                                    <div className="col-6">
+                                        <label htmlFor="technologies" className="form-label">Technologies</label>
+                                        <input type="text" className="form-control" id="technologies" name="technologies" placeholder="Separate by comma" defaultValue={props.state.data?.technologies} required />
+                                    </div>
+                                </div>
+
                                 <div className="row mb-3">
                                     <div className="col-6">
                                         <label htmlFor="estimatedTime" className="form-label">Estimated time</label>

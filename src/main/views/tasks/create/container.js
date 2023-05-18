@@ -48,6 +48,8 @@ class Container extends React.Component {
             payload.priorityId = Number(payload.priorityId);
             payload.actualTime = Number(payload.actualTime);
             payload.estimatedTime = Number(payload.estimatedTime);
+            payload.programmingLanguages = payload.programmingLanguages.split(",");
+            payload.technologies = payload.technologies.split(",");
             if (payload.startedAt === "") {
                 delete payload.startedAt;
             }

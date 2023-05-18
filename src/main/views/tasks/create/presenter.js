@@ -52,7 +52,7 @@ const Presenter = props => (
 
                         <div className="mb-3">
                             <label htmlFor="phaseId" className="form-label">Phase</label>
-                            <select className="form-select" aria-label="phaseId" name="phaseId" id="phaseId" defaultValue={1} required>
+                            <select className="form-select" aria-label="phaseId" name="phaseId" id="phaseId" defaultValue={3} required>
                                 {
                                     Object.keys(Constants.PHASE).map((key, i) => {
                                         return (
@@ -62,6 +62,18 @@ const Presenter = props => (
                                 }
                             </select>
                         </div>
+                        
+                        <div className="row mb-3">
+                            <div className="col-6">
+                                <label htmlFor="programmingLanguages" className="form-label">Languages</label>
+                                <input type="text" className="form-control" id="programmingLanguages" name="programmingLanguages" placeholder="Separate by comma" required />
+                            </div>
+                            <div className="col-6">
+                                <label htmlFor="technologies" className="form-label">Technologies</label>
+                                <input type="text" className="form-control" id="technologies" name="technologies" placeholder="Separate by comma" required />
+                            </div>
+                        </div>
+
                         <div className="row mb-3">
                             <div className="col-6">
                                 <label htmlFor="estimatedTime" className="form-label">Estimated time</label>

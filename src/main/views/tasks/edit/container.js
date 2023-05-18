@@ -29,6 +29,12 @@ class Container extends React.Component {
         if (itemSelected) {
             this.setState({ isLoading: true });
             getById(itemSelected.id).then(data => {
+                if (!data.programmingLanguages) {
+                    data.programmingLanguages = data.programmingLanguages.join(",");
+                }
+                if (!data.technologies) {
+                    data.technologies = data.technologies.join(",");
+                }
                 this.setState({ data });
             }).catch(e => {
                 this.props.addNotification({ typeToast: 'error', text: e.message, title: "ERROR" });
@@ -54,6 +60,8 @@ class Container extends React.Component {
             payload.priorityId = Number(payload.priorityId);
             payload.actualTime = Number(payload.actualTime);
             payload.estimatedTime = Number(payload.estimatedTime);
+            payload.programmingLanguages = payload.programmingLanguages.split(",");
+            payload.technologies = payload.technologies.split(",");
             if (payload.startedAt === "") {
                 delete payload.startedAt;
             }

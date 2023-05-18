@@ -38,21 +38,23 @@ export default Object.freeze({
     },
     STATUS: {
         1: "ACTIVE",
-        2: "INACTIVE"
+        2: "INACTIVE",
+        3: "COMPLETED"
     },
     PRIORITY: {
-        1: "MUY BAJA",
-        2: "BAJA",
-        3: "MEDIA",
-        4: "ALTA",
-        5: "MUY ALTA"
+        1: "VERY LOW",
+        2: "LOW",
+        3: "HALF",
+        4: "HIGH",
+        5: "VERY HIGH"
     },
     PHASE: {
-        1: "ANÁLISIS",
-        2: "DISEÑO",
-        3: "IMPLEMENTACION",
-        4: "PRUEBAS",
-        5: "DESPLIEGUE",
-        6: "MANTENIMIENTO"
+        1: "ANALISYS",
+        2: "DESIGN",
+        3: "IMPLEMENTATION",
+        4: "COMPILATION",
+        5: "TESTING",
+        6: "DEPLOY",
+        7: "MAINTENANCE",
     }
 });
